@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import ApiError from "../utils/apiError.js";
-import ApiResponse from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {
   generateAccessAndRefresToken,
@@ -30,15 +28,25 @@ export const userRegistration = asyncHandler(async (req, res) => {
   const { username, email, password, fullname } = req.body;
 
   //* Validating details
-  notEmptyValidation([email, username, password, fullname]);
-  usernameValidation(username);
-  emailValidation(email);
-  passwordValidation(password);
+  notEmptyValidation(res, [email, username, password, fullname]);
+  usernameValidation(res, username);
+  emailValidation(res, email);
+  passwordValidation(res, password);
 
   //* Checking if User exists
-  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-  if (existingUser) {
-    throw new ApiError(409, "User with email or username already exists");
+  // const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+  // if (existingUser) {
+  //   res
+  //     .status(409)
+  //     .json({ message: "User with email or username already exists" });
+  // }
+  const emailExists = await User.findOne({ email });
+  if (emailExists) {
+    res.status(409).json({ message: "Email already taken!" });
+  }
+  const usernameExists = await User.findOne({ username });
+  if (usernameExists) {
+    res.status(409).json({ message: "username already taken!" });
   }
 
   //* Checking for files
@@ -63,11 +71,11 @@ export const userRegistration = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   if (!user) {
-    throw new ApiError(500, "Error creating user, Please try again!");
+    res.json(500).json({ message: "Error creating user, Please try again!" });
   }
 
   //* Sending RESPONSE
-  return res.status(201).json(new ApiResponse(200, user, "User registered!"));
+  res.status(201).json({ user, message: "User registered!" });
 });
 
 // Login User
@@ -85,24 +93,24 @@ export const userLogin = asyncHandler(async (req, res) => {
 
   //* Validate Username/Email & Password
   if (!email && !username) {
-    throw new ApiError(400, "Usermail/Email is required");
+    res.status(400).json({ message: "Usermail/Email is required" });
   }
-  email && emailValidation(email);
-  username && usernameValidation(username);
+  email && emailValidation(res, email);
+  username && usernameValidation(res, username);
   if (!password) {
-    throw new ApiError(400, "Password is required");
+    res.status(400).json({ message: "Password is required" });
   }
 
   //* Finding User
   const user = await User.findOne({ $or: [{ email }, { username }] });
   if (!user) {
-    throw new ApiError(400, "User not found, try signing up!");
+    res.status(400).json({ message: "User not found, try signing up!" });
   }
 
   //* Checking Password
   const passwordCheck = await user.isPasswordCorrect(password);
   if (!passwordCheck) {
-    throw new ApiError(401, "Wrong credientials!");
+    res.status(401).json({ message: "Wrong credentials!" });
   }
 
   //* Generate Token
@@ -119,17 +127,12 @@ export const userLogin = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
-    .json(
-      new ApiResponse(
-        200,
-        {
-          user: loggedInUser,
-          accessToken,
-          refreshToken,
-        },
-        "User loggedin successfully!"
-      )
-    );
+    .json({
+      user: loggedInUser,
+      accessToken,
+      refreshToken,
+      message: "User loggedin successfully!",
+    });
 });
 
 // Logout User
@@ -153,7 +156,7 @@ export const userLogout = asyncHandler(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logged out"));
+    .json({ message: "User logged out" });
 });
 
 // Generating Refresh Access Token
@@ -172,7 +175,7 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
     req.cookies?.refreshToken || req.body?.refreshToken;
 
   if (!incomingRefreshToken) {
-    throw new ApiError(401, "Unauthorized request!");
+    res.status(401).json({ message: "Unauthorized request!" });
   }
 
   try {
@@ -185,12 +188,12 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
     //* Getting user by refresh token
     const user = await User.findById(decodedToken?._id);
     if (!user) {
-      throw new ApiError(401, "Invalid refresh token!");
+      res.status(401).json({ message: "Invalid refresh token!" });
     }
 
     //* Comparing cookie refresh token with user refresh token
     if (incomingRefreshToken !== user?.refreshToken) {
-      throw new ApiError(401, "Refres token is expired!");
+      res.status(401).json({ message: "Refres token is expired!" });
     }
 
     //* Generating new Access token
@@ -203,15 +206,11 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .json(
-        new ApiResponse(
-          200,
-          { accessToken, refreshToken },
-          "Access token refreshed!"
-        )
-      );
+      .json({ accessToken, refreshToken, message: "Access token refreshed!" });
   } catch (error) {
-    throw new ApiError(401, error?.message || "Invalid refresh token!");
+    res
+      .status(401)
+      .json({ message: error?.message || "Invalid refresh token!" });
   }
 });
 
@@ -222,7 +221,7 @@ export const changePassword = asyncHandler(async (req, res) => {
    * TODO: Getting user from cookie
    * TODO: Compating old password with the user password
    * TODO: If true, set new password as user password
-   * TODO: Return response
+   * TODO: response
    * **/
 
   //* Getting data from user
@@ -232,17 +231,17 @@ export const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user?.id);
 
   //* Validating
-  notEmptyValidation([oldPassword, newPassword]);
+  notEmptyValidation(res, [oldPassword, newPassword]);
+  passwordValidation(res, newPassword);
   const passwordCheck = await user.isPasswordCorrect(oldPassword);
   if (!passwordCheck) {
-    throw new ApiError(400, "Invalid old password!");
+    res.status(400).json({ message: "Invalid old password!" });
   }
-  passwordValidation(newPassword);
   if (oldPassword === newPassword) {
-    throw new ApiError(
-      400,
-      "New password is same as old password, try a different one!"
-    );
+    res.status(400).json({
+      message:
+        "New password is the same as the old password, try a different one!",
+    });
   }
 
   //* Setting new password
@@ -250,16 +249,12 @@ export const changePassword = asyncHandler(async (req, res) => {
   await user.save({ validateBeforeSave: false });
 
   //* Response
-  res
-    .status(200)
-    .json(new ApiResponse(200, {}, "Password changed successfully"));
+  res.status(200).json({ message: "Password changed successfully" });
 });
 
 // Get Current User
 export const getCurrentUser = asyncHandler(async (req, res) => {
-  res
-    .status(200)
-    .json(new ApiResponse(200, req?.user, "Fetched current user!"));
+  res.status(200).json({ user: req?.user, message: "Fetched current user!" });
 });
 
 // Updating User Profile
@@ -274,9 +269,9 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   const { username, email, fullname, gender, dateOfBirth, location } = req.body;
 
   //* Validating user
-  notEmptyValidation([email, username, fullname]);
-  usernameValidation(username);
-  emailValidation(email);
+  notEmptyValidation(res, [email, username, fullname]);
+  usernameValidation(res, username);
+  emailValidation(res, email);
 
   //* Checking if username or email already exist
   const existingUser = await User.findOne({
@@ -284,7 +279,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   });
 
   if (existingUser) {
-    throw new ApiError(409, "Email or username is already in use");
+    res.status(409).json({ message: "Email or username is already in use" });
   }
 
   //* Updating user
@@ -295,9 +290,9 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   ).select("-password -refreshToken");
 
   //* Response
-  return res
+  res
     .status(200)
-    .json(new ApiResponse(200, user, "Account details updated successfully"));
+    .json({ user, message: "Account details updated successfully" });
 });
 
 // Update Avatar Image
@@ -321,5 +316,5 @@ export const updateAvatarImage = asyncHandler(async (req, res) => {
     { new: true }
   ).select("-password -refreshToken");
 
-  res.status(200).json(new ApiResponse(200, { user }, "Avatar updated!"));
+  res.status(200).json({ user, message: "Avatar updated!" });
 });

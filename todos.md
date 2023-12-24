@@ -2,16 +2,9 @@
 
 <!-- BACKEND -->
 
-1. Creating Schemas (User, Stories)
-2. Creating Routes
-3. Creating Controllers
+1. User Authentication completed
+2. Profile Update completed
 
-- User
-- Genre
-- Story
+<!-- TODOS -->
 
----
-
-- Generating Accesstoken & Refresh Token
-
----
+Very important - Registering user in backend

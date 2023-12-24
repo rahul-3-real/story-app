@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // Routes
+app.get("/api", (req, res) => res.send("Server Started"));
 app.use("/api/auth", userRouter);
 
 export { app };
