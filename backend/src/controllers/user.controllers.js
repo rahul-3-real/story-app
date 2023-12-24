@@ -130,3 +130,27 @@ export const userLogin = asyncHandler(async (req, res) => {
       )
     );
 });
+
+// Logout User
+export const userLogout = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Clearing cookies
+   * TODO: Clearing refresh token from database
+   **/
+
+  //* verifyJWT middleware is set, which finds user, sets refreshToken in DB as undefined
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: { refreshToken: undefined },
+    },
+    { new: true }
+  );
+
+  //* RESPONSE
+  res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged out"));
+});
