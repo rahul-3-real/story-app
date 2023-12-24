@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  changePassword,
   refreshAccessToken,
   userLogin,
   userLogout,
@@ -14,5 +15,6 @@ userRouter.post("/register", upload.single("avatar"), userRegistration);
 userRouter.post("/login", userLogin);
 userRouter.post("/logout", verifyJWT, userLogout);
 userRouter.post("/refresh-access", refreshAccessToken);
+userRouter.patch("/change-password", verifyJWT, changePassword);
 
 export default userRouter;

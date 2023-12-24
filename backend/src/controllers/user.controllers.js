@@ -214,3 +214,46 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
     throw new ApiError(401, error?.message || "Invalid refresh token!");
   }
 });
+
+// Change Password
+export const changePassword = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Getting details from frontend
+   * TODO: Getting user from cookie
+   * TODO: Compating old password with the user password
+   * TODO: If true, set new password as user password
+   * TODO: Return response
+   * **/
+
+  //* Getting data from user
+  const { oldPassword, newPassword } = req.body;
+
+  //* Getting user from cookie
+  const user = await User.findById(req.user?.id);
+
+  //* Validating
+  notEmptyValidation([oldPassword, newPassword]);
+  const passwordCheck = await user.isPasswordCorrect(oldPassword);
+  if (!passwordCheck) {
+    throw new ApiError(400, "Invalid old password!");
+  }
+  passwordValidation(newPassword);
+  if (oldPassword === newPassword) {
+    throw new ApiError(
+      400,
+      "New password is same as old password, try a different one!"
+    );
+  }
+
+  //* Setting new password
+  user.password = newPassword;
+  await user.save({ validateBeforeSave: false });
+
+  //* Response
+  res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password changed successfully"));
+});
+
+// Updating User Profile
+export const updateUserProfile = asyncHandler(async (req, res) => {});
