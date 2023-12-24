@@ -1,0 +1,31 @@
+@use "../abstract/variables" as var;
+
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 50px 30px;
+  gap: 100px;
+
+  form {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+
+    li a {
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: capitalize;
+      color: var.$heading-clr;
+    }
+  }
+}

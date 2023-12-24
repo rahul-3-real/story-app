@@ -1,0 +1,49 @@
+@use "../abstract/variables" as var;
+
+.form-group {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: var.$heading-clr;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border: 0;
+  outline: 0;
+  border-radius: 5px;
+  background-color: var.$foreground;
+  font-size: 16px;
+  font-weight: 400;
+  color: var.$heading-clr;
+}
+
+.form-switch .switch-input {
+  width: 40px;
+  height: 20px;
+  display: block;
+  border-radius: 50px;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  background-color: var.$foreground;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center left;
+  transition: 0.5s ease all;
+
+  &:checked {
+    background-color: var.$primary;
+    background-position: center right;
+  }
+}

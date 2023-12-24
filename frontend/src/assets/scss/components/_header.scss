@@ -1,0 +1,139 @@
+@use "../abstract/variables" as var;
+
+.header {
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 2px solid var.$foreground;
+  background: var.$background;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+
+    .sidebar-toggle {
+      border: 0;
+      padding: 0;
+      outline: 0;
+      background: transparent;
+      margin-right: auto;
+      cursor: pointer;
+      svg {
+        width: 30px;
+        height: 30px;
+        color: var.$heading-clr;
+      }
+    }
+
+    .search-form {
+      width: 100%;
+      max-width: 500px;
+      background-color: var.$foreground;
+      border: 1px solid var.$foreground;
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      input {
+        width: 100%;
+        padding: 10px 15px;
+        height: 40px;
+        outline: 0;
+        border: 0;
+        background: transparent;
+        transition: 0.5s ease all;
+        font-size: 16px;
+        color: var.$heading-clr;
+      }
+
+      button {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        color: var.$primary;
+        border: 0;
+        outline: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        svg {
+          height: 18px;
+          width: 18px;
+        }
+      }
+    }
+
+    .dropdown {
+      position: relative;
+
+      .theme-toggle {
+        border: 0;
+        outline: 0;
+        padding: 0;
+        margin: 0;
+        background: var.$heading-clr;
+        color: var.$background;
+        border-radius: 5px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: var.$background;
+        border-top: 2px solid var.$heading-clr;
+        border-left: 1px solid var.$foreground;
+        border-right: 1px solid var.$foreground;
+        max-width: 200px;
+        width: 150px;
+        transition: 0.5s ease all;
+        pointer-events: all;
+        opacity: 1;
+        z-index: 2;
+
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 15px;
+          padding: 15px;
+          border-bottom: 1px solid var.$foreground;
+          cursor: pointer;
+          opacity: 1;
+          pointer-events: all;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            color: var.$heading-clr;
+          }
+          span {
+            font-size: 14px;
+            color: var.$text-clr;
+          }
+        }
+      }
+
+      &.hide .dropdown-menu {
+        top: calc(100% + 50px);
+        pointer-events: none;
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+  }
+}

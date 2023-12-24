@@ -1,0 +1,35 @@
+:root {
+  --primary: #46a8a9;
+  --background: #ffffff;
+  --foreground: #eaeaea;
+  --heading-clr: #1e1e1e;
+  --text-clr: #303030;
+}
+[data-theme="dark"] {
+  --primary: #46a8a9 !important;
+  --background: #1e1e1e !important;
+  --foreground: #303030 !important;
+  --heading-clr: #ffffff !important;
+  --text-clr: #939393 !important;
+}
+:root {
+  --dark: #1e1e1e !important;
+  --dark-alt: #303030 !important;
+  --light: #ffffff !important;
+  --light-alt: #939393 !important;
+}
+
+// Colors
+$primary: var(--primary);
+$background: var(--background);
+$foreground: var(--foreground);
+$heading-clr: var(--heading-clr);
+$text-clr: var(--text-clr);
+$dark: var(--dark);
+$dark-alt: var(--dark-alt);
+$light: var(--light);
+$light-alt: var(--light-alt);
+
+// Fonts
+$sans-serif: "Poppins", sans-serif;
+$serif: "Playfair Display", serif;

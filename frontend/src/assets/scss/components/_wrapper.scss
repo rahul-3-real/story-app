@@ -1,0 +1,26 @@
+@use "../abstract/variables" as var;
+
+.wrapper {
+  width: calc(100% - 300px);
+  transition: 0.5s ease all;
+
+  .content {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    flex-direction: row;
+    min-height: calc(100vh - 60px);
+
+    .section {
+      width: calc(100% - 330px);
+      padding: 20px 0;
+    }
+  }
+}
+
+.main.collapsed {
+  .wrapper {
+    width: calc(100% - 80px);
+  }
+}

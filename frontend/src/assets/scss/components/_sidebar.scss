@@ -1,0 +1,22 @@
+@use "../abstract/variables" as var;
+
+.sidebar {
+  width: 330px;
+  background: var.$background;
+  border-left: 2px solid var.$foreground;
+  padding: 20px;
+
+  .list .list-item {
+    margin-bottom: 7px;
+
+    .list-link {
+      font-size: 16px;
+      font-weight: 400;
+      color: var.$text-clr;
+      transition: 0.5s ease all;
+      &:hover {
+        color: var.$primary;
+      }
+    }
+  }
+}

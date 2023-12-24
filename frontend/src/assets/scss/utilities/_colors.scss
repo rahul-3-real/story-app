@@ -1,0 +1,12 @@
+@use "../abstract/colors" as clr;
+
+@each $name, $color in clr.$color-list {
+  .text-#{$name} {
+    color: $color !important;
+  }
+}
+@each $name, $color in clr.$color-list {
+  .bg-#{$name} {
+    background-color: $color !important;
+  }
+}

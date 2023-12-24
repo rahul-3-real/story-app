@@ -1,0 +1,14 @@
+@use "./variables" as var;
+
+// Color Classes
+$color-list: (
+  "primary": var.$primary,
+  "background": var.$background,
+  "foreground": var.$foreground,
+  "heading-clr": var.$heading-clr,
+  "text-clr": var.$text-clr,
+  "light": #ffffff,
+  "light-alt": #eaeaea,
+  "dark": #1e1e1e,
+  "dark-alt": #303030,
+);
