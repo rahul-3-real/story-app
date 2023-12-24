@@ -68,3 +68,65 @@ export const userRegistration = asyncHandler(async (req, res) => {
   //* Sending RESPONSE
   return res.status(201).json(new ApiResponse(200, user, "User registered!"));
 });
+
+// Login User
+export const userLogin = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Taking details from frontend
+   * TODO: Finding user
+   * TODO: Password check
+   * TODO: Generating Access & Refresh Token
+   * TODO: Send cookie + response
+   **/
+
+  //* Getting details from user
+  const { email, username, password } = req.body;
+
+  //* Validate Username/Email & Password
+  if (!email && !username) {
+    throw new ApiError(400, "Usermail/Email is required");
+  }
+  email && emailValidation(email);
+  username && usernameValidation(username);
+  if (!password) {
+    throw new ApiError(400, "Password is required");
+  }
+
+  //* Finding User
+  const user = await User.findOne({ $or: [{ email }, { username }] });
+  if (!user) {
+    throw new ApiError(400, "User not found, try signing up!");
+  }
+
+  //* Checking Password
+  const passwordCheck = await user.isPasswordCorrect(password);
+  if (!passwordCheck) {
+    throw new ApiError(401, "Wrong credientials!");
+  }
+
+  //* Generate Token
+  const { accessToken, refreshToken } = await generateAccessAndRefresToken(
+    user._id
+  );
+
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
+
+  //* Returning response & cookies
+  res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          user: loggedInUser,
+          accessToken,
+          refreshToken,
+        },
+        "User loggedin successfully!"
+      )
+    );
+});
