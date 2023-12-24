@@ -255,5 +255,71 @@ export const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
+// Get Current User
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  res
+    .status(200)
+    .json(new ApiResponse(200, req?.user, "Fetched current user!"));
+});
+
 // Updating User Profile
-export const updateUserProfile = asyncHandler(async (req, res) => {});
+export const updateUserProfile = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Getting details from frontend
+   * TODO: Validating details
+   * TODO: Updating user
+   * **/
+
+  //* Getting details
+  const { username, email, fullname, gender, dateOfBirth, location } = req.body;
+
+  //* Validating user
+  notEmptyValidation([email, username, fullname]);
+  usernameValidation(username);
+  emailValidation(email);
+
+  //* Checking if username or email already exist
+  const existingUser = await User.findOne({
+    $and: [{ _id: { $ne: req.user?._id } }, { $or: [{ email }, { username }] }],
+  });
+
+  if (existingUser) {
+    throw new ApiError(409, "Email or username is already in use");
+  }
+
+  //* Updating user
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    { $set: { username, email, fullname, gender, dateOfBirth, location } },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  //* Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Account details updated successfully"));
+});
+
+// Update Avatar Image
+export const updateAvatarImage = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Getting file from frontend
+   * TODO: Updating file
+   * **/
+
+  //* Getting file
+  let localPath;
+  if (!req.file) {
+    localPath = "";
+  }
+  localPath = req.file?.path;
+
+  //* Updating file
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    { $set: { avatar: localPath } },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  res.status(200).json(new ApiResponse(200, { user }, "Avatar updated!"));
+});
