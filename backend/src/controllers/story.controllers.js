@@ -19,6 +19,23 @@ export const fetchAllStories = asyncHandler(async (req, res) => {
   }
 });
 
+// Get Story of a user
+export const fetchSingleStory = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get details from frontend
+   * TODO: Fetch Stories
+   * **/
+
+  try {
+    const { storyId } = req.params;
+    const story = await Story.findOne({ _id: storyId });
+    console.log(story);
+    res.status(200).json({ story });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Create Story
 export const createStory = asyncHandler(async (req, res) => {
   /**
@@ -160,23 +177,6 @@ export const fetchStoriesOfUser = asyncHandler(async (req, res) => {
     const { userId } = req.params;
     const userStories = await Story.find({ user: userId });
     res.status(200).json({ stories: userStories });
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-// Get Story of a user
-export const fetchSingleStory = asyncHandler(async (req, res) => {
-  /**
-   * TODO: Get details from frontend
-   * TODO: Fetch Stories
-   * **/
-
-  try {
-    const { storyId } = req.params;
-    const story = await Story.findOne({ _id: storyId });
-    console.log(story);
-    res.status(200).json({ story });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
