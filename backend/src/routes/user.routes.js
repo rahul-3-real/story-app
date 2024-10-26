@@ -14,6 +14,7 @@ import {
   updateEmailController,
   updateProfileController,
   updateAvatarController,
+  removeAvatarController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 import uploadMiddleware from "../middlewares/multer.middleware.js";
@@ -46,5 +47,6 @@ router
     uploadMiddleware("avatar", ["jpg", "jpeg", "png", "gif", "svg"]),
     updateAvatarController
   );
+router.route("/remove-avatar").patch(verifyUser, removeAvatarController);
 
 export default router;
