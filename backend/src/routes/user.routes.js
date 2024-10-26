@@ -19,4 +19,6 @@ router.route("/logout").post(verifyUser, logoutController);
 router.route("/refresh-access-token").post(refreshAccessTokenController);
 router.route("/profile").get(verifyUser, getUserProfileController);
 
+router.route("/forgot-password").post(forgotPasswordController);
+
 export default router;

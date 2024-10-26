@@ -15,9 +15,14 @@ import {
   options,
   generateAccessRefreshToken,
   generate20CharToken,
+  generatePasswordResetToken,
   generateVerifyEmailToken,
 } from "../utils/generateToken.js";
-import { accountCreatedEmail, verifyEmail } from "../configs/email.config.js";
+import {
+  accountCreatedEmail,
+  sendPasswordResetEmail,
+  verifyEmail,
+} from "../configs/email.config.js";
 
 // Register Controller
 export const registerController = asyncHandler(async (req, res) => {
@@ -232,4 +237,36 @@ export const getUserProfileController = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, user, "Fetched user profile successfully!"));
+});
+
+// Forgot Password Controller
+export const forgotPasswordController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get email from frontend
+   * TODO: Validate data
+   * TODO: Check if user exists
+   * TODO: Sending Email with password reset token
+   * TODO: Sending Response
+   * **/
+
+  // * Get email from frontend
+  const { email } = req.body;
+
+  // * Validate data
+  notEmptyValidation([email]);
+  emailValidation(email);
+
+  // * Check if user exists
+  const user = await User.findOne({ email });
+  if (!user) throw new ApiError(400, "User does not exist");
+
+  // * Sending Email with password reset token
+  const token = generate20CharToken();
+  await generatePasswordResetToken(user._id, token);
+  await sendPasswordResetEmail(user.email, token);
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password reset link sent to your email"));
 });
