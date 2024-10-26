@@ -355,3 +355,36 @@ export const resetPasswordController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password updated successfully!"));
 });
+
+// Verify Account Controller
+export const verifyAccountController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get token from URL
+   * TODO: Check if token is valid
+   * TODO: Update user's verified status
+   * TODO: Sending Response
+   * **/
+
+  // * Get token from URL
+  const { token } = req.query;
+
+  // * Check if token is valid
+  const user = await User.findOne({ verificationToken: token });
+  if (!user) throw new ApiError(400, "Invalid token");
+
+  const currentDate = new Date();
+  if (currentDate > user.verificationTokenExpiry) {
+    throw new ApiError(400, "Verification token has expired");
+  }
+
+  // * Update user's verified status
+  user.verified = true;
+  user.verificationToken = undefined;
+  user.verificationTokenExpiry = undefined;
+  await user.save();
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Account verified successfully!"));
+});
