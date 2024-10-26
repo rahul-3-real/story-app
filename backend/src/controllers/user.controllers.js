@@ -133,3 +133,28 @@ export const loginController = asyncHandler(async (req, res) => {
       )
     );
 });
+
+// Logout Controller
+export const logoutController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Update token in backend
+   * TODO: Delete cookie from frontend
+   * TODO: Sending Response
+   * **/
+
+  // * Update token in backend
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: { refreshToken: undefined },
+    },
+    { new: true }
+  );
+
+  // * Sending Response & Delete cookie from frontend
+  return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged out!"));
+});
