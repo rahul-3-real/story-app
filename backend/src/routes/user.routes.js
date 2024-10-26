@@ -5,6 +5,7 @@ import {
   registerController,
   logoutController,
   refreshAccessTokenController,
+  getUserProfileController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 
@@ -16,5 +17,6 @@ router.route("/login").post(loginController);
 router.route("/logout").post(verifyUser, logoutController);
 
 router.route("/refresh-access-token").post(refreshAccessTokenController);
+router.route("/profile").get(verifyUser, getUserProfileController);
 
 export default router;

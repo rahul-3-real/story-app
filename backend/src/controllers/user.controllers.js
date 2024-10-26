@@ -216,3 +216,20 @@ export const refreshAccessTokenController = asyncHandler(async (req, res) => {
     throw new ApiError(400, error.message || "Invalid refresh token");
   }
 });
+
+// Get User Profile Controller
+export const getUserProfileController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get User from request
+   * TODO: Send Response
+   * **/
+
+  // * Get User from request
+  const requestUser = req.user;
+  const user = await User.findById(requestUser._id);
+
+  // * Send Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Fetched user profile successfully!"));
+});
