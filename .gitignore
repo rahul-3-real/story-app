@@ -123,6 +123,8 @@ dist
 
 public/
 extras/
+old/
+
 # Ignore node_modules and Extras folders recursively
 **/node_modules/
 **/extras/
