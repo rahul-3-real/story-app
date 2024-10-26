@@ -4,6 +4,7 @@ import {
   loginController,
   registerController,
   logoutController,
+  refreshAccessTokenController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 
@@ -13,5 +14,7 @@ const router = Router();
 router.route("/register").post(registerController);
 router.route("/login").post(loginController);
 router.route("/logout").post(verifyUser, logoutController);
+
+router.route("/refresh-access-token").post(refreshAccessTokenController);
 
 export default router;
