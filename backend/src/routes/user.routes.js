@@ -6,6 +6,8 @@ import {
   logoutController,
   refreshAccessTokenController,
   getUserProfileController,
+  forgotPasswordController,
+  forgotPasswordRequestController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 
@@ -20,5 +22,6 @@ router.route("/refresh-access-token").post(refreshAccessTokenController);
 router.route("/profile").get(verifyUser, getUserProfileController);
 
 router.route("/forgot-password").post(forgotPasswordController);
+router.route("/forgot-password-request").patch(forgotPasswordRequestController);
 
 export default router;

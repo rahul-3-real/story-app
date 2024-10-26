@@ -270,3 +270,51 @@ export const forgotPasswordController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password reset link sent to your email"));
 });
+
+// Forgot Password Request Controller
+export const forgotPasswordRequestController = asyncHandler(
+  async (req, res) => {
+    /**
+     * TODO: Get token from URL
+     * TODO: Check if token is valid
+     * TODO: Get data from Frontend
+     * TODO: Validate data
+     * TODO: Update new password
+     * TODO: Sending Response
+     * **/
+
+    // * Get token from URL
+    const { token } = req.query;
+
+    // * Check if token is valid
+    const user = await User.findOne({ passwordResetToken: token });
+    if (!user) {
+      throw new ApiError(400, "Invalid token");
+    }
+
+    const currentDate = new Date();
+    if (currentDate > user.passwordResetTokenExpiry) {
+      throw new ApiError(400, "Password reset token has expired");
+    }
+
+    // * Get data from Frontend
+    const { password, password2 } = req.body;
+
+    // * Validate data
+    notEmptyValidation([password, password2]);
+    minLengthValidation(password, 6, "Password");
+    passwordValidation(password);
+    compareFieldValidation(password, password2, "Password does not match");
+
+    // * Update new password
+    user.password = password;
+    user.passwordResetToken = undefined;
+    user.passwordResetTokenExpiry = undefined;
+    await user.save();
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Password updated successfully!"));
+  }
+);
