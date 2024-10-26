@@ -11,6 +11,7 @@ import {
   resetPasswordController,
   verifyAccountController,
   verifyAccountRequestController,
+  updateEmailController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 
@@ -32,5 +33,7 @@ router.route("/verify-account").patch(verifyAccountController);
 router
   .route("/verify-account-request")
   .patch(verifyUser, verifyAccountRequestController);
+
+router.route("/update-email").patch(verifyUser, updateEmailController);
 
 export default router;

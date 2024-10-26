@@ -421,3 +421,54 @@ export const verifyAccountRequestController = asyncHandler(async (req, res) => {
     );
   }
 });
+
+// Update Email Controller
+export const updateEmailController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get new email from frontend
+   * TODO: Validate data
+   * TODO: Check if new email is already taken
+   * TODO: Update user's email
+   * TODO: Sending Response
+   * **/
+
+  // * Get new email from frontend
+  const { newEmail } = req.body;
+
+  // * Validate data
+  notEmptyValidation([newEmail]);
+  emailValidation(newEmail);
+
+  // * Check if new email is already taken
+  const existingUser = await User.findOne({ email: newEmail });
+  if (existingUser) throw new ApiError(400, "Email is already taken");
+
+  try {
+    // * Update user's email
+    const user = req.user;
+    user.email = newEmail;
+    user.verified = false;
+    await user.save();
+
+    // * Send Verification email
+    const token = generate20CharToken();
+    await generateVerifyEmailToken(user._id, token);
+    await verifyEmail(user.email, token);
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {},
+          "Email updated successfully! Verification link sent to your new email."
+        )
+      );
+  } catch (error) {
+    throw new ApiError(
+      500,
+      error.message || "Failed to send verification email"
+    );
+  }
+});
