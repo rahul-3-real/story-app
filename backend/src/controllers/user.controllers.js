@@ -318,3 +318,40 @@ export const forgotPasswordRequestController = asyncHandler(
       .json(new ApiResponse(200, {}, "Password updated successfully!"));
   }
 );
+
+// Reset Password Controller
+export const resetPasswordController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from frontend
+   * TODO: Validate data
+   * TODO: check if old password is correct
+   * TODO: Update password to new password
+   * TODO: Sending Response
+   * **/
+
+  // * Get data from frontend
+  const { oldPassword, password, password2 } = req.body;
+
+  // * Validate data
+  notEmptyValidation([oldPassword, password, password2]);
+  minLengthValidation(password, 6, "Password");
+  compareFieldValidation(password, password2, "Password does not match");
+  passwordValidation(password);
+  if (oldPassword === password) {
+    throw new ApiError(400, "New password cannot be same as old password");
+  }
+
+  // * Check if old password is correct
+  const user = await User.findById(req.user._id).select("password");
+  const passwordCheck = await user.checkPassword(oldPassword);
+  if (!passwordCheck) throw new ApiError(400, "Old password is incorrect");
+
+  // * Update password to new password
+  user.password = password;
+  await user.save();
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password updated successfully!"));
+});
