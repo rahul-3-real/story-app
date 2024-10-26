@@ -121,7 +121,6 @@ dist
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
 .DS_Store
 
-public/
 public_draft/
 extras/
 old/
@@ -129,10 +128,8 @@ old/
 # Ignore node_modules and Extras folders recursively
 **/node_modules/
 **/extras/
-**/public/
 **/public_draft/
 
 # Ignore all files within Extras folder and its subdirectories
 **/extras/**
-**/public/**
 **/public_draft/**
