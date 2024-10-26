@@ -13,8 +13,10 @@ import {
   verifyAccountRequestController,
   updateEmailController,
   updateProfileController,
+  updateAvatarController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
+import uploadMiddleware from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
@@ -37,5 +39,12 @@ router
 
 router.route("/update-email").patch(verifyUser, updateEmailController);
 router.route("/update-profile").patch(verifyUser, updateProfileController);
+router
+  .route("/update-avatar")
+  .patch(
+    verifyUser,
+    uploadMiddleware("avatar", ["jpg", "jpeg", "png", "gif", "svg"]),
+    updateAvatarController
+  );
 
 export default router;

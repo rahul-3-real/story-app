@@ -122,6 +122,7 @@ dist
 .DS_Store
 
 public/
+public_draft/
 extras/
 old/
 
@@ -129,7 +130,9 @@ old/
 **/node_modules/
 **/extras/
 **/public/
+**/public_draft/
 
 # Ignore all files within Extras folder and its subdirectories
 **/extras/**
 **/public/**
+**/public_draft/**
