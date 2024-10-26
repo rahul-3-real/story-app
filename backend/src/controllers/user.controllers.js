@@ -7,6 +7,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import {
   compareFieldValidation,
   emailValidation,
+  minimumAgeValidation,
   minLengthValidation,
   notEmptyValidation,
   passwordValidation,
@@ -470,5 +471,47 @@ export const updateEmailController = asyncHandler(async (req, res) => {
       500,
       error.message || "Failed to send verification email"
     );
+  }
+});
+
+// Update Profile Controller
+export const updateProfileController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get updated profile data from frontend
+   * TODO: Validate data
+   * TODO: Update user's profile
+   * TODO: Sending Response
+   * **/
+
+  // * Get updated profile data from frontend
+  const { full_name, date_of_birth, gender } = req.body;
+
+  try {
+    // * Find the user by ID
+    const user = await User.findById(req.user._id);
+
+    // * Check if is date_of_birth changed
+    if (date_of_birth) {
+      minimumAgeValidation(date_of_birth, 5);
+    }
+    if (full_name) minLengthValidation(full_name, 3, "Full Name");
+
+    // * Update user's profile if data is provided, otherwise keep the existing details
+    user.full_name = full_name || user.full_name;
+    user.date_of_birth = date_of_birth || user.date_of_birth;
+    user.gender = gender || user.gender;
+
+    // * Save the updated user profile
+    await user.save();
+
+    // * Updated User
+    const updatedUser = await User.findById(user._id);
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, updatedUser, "User updated successfully!"));
+  } catch (error) {
+    throw new ApiError(500, error.message || "Failed to update user profile");
   }
 });
