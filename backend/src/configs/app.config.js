@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import userRouter from "../routes/user.routes.js";
+
 const app = express();
 
 // CORS Options
@@ -21,6 +23,7 @@ app.use(express.static("public"));
 app.use(express.static(process.env.MEDIA_UPLOAD_FOLDER));
 
 // Routes
+app.use("/api/user", userRouter);
 
 // Test Route
 app.get("/api", (req, res) => {
