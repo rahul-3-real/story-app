@@ -81,3 +81,55 @@ export const registerController = asyncHandler(async (req, res) => {
       )
     );
 });
+
+// Login Controller
+export const loginController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from Frontend
+   * TODO: Validate data
+   * TODO: Check if user exists
+   * TODO: Check Password
+   * TODO: Generate token
+   * TODO: Send Response
+   * **/
+
+  // * Get data from Frontend
+  const { email, password } = req.body;
+
+  // * Validate data
+  notEmptyValidation([email, password]);
+  emailValidation(email);
+  passwordValidation(password);
+
+  // * Check if user exists
+  const userExist = await User.findOne({ email }).select("password");
+  if (!userExist) throw new ApiError(401, "Invalid email or password");
+
+  // * Check Password
+  const isPasswordCorrect = await userExist.checkPassword(password);
+  if (!isPasswordCorrect) throw new ApiError(401, "Invalid email or password");
+
+  // * Generate token
+  const { accessToken, refreshToken } = await generateAccessRefreshToken(
+    userExist._id
+  );
+
+  const user = await User.findById(userExist._id);
+
+  // * Send Response
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          user,
+          accessToken,
+          refreshToken,
+        },
+        "Logged in successfully!"
+      )
+    );
+});
