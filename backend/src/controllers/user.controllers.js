@@ -66,9 +66,9 @@ export const registerController = asyncHandler(async (req, res) => {
 
   // * Send Emails
   const token = generate20CharToken();
-  await accountCreatedEmail(user);
+  //   await accountCreatedEmail(user);
   await generateVerifyEmailToken(user._id, token);
-  await verifyEmail(user, token);
+  //   await verifyEmail(user, token);
 
   // * Send Response
   return res
@@ -264,7 +264,7 @@ export const forgotPasswordController = asyncHandler(async (req, res) => {
   // * Sending Email with password reset token
   const token = generate20CharToken();
   await generatePasswordResetToken(user._id, token);
-  await sendPasswordResetEmail(user.email, token);
+  //   await sendPasswordResetEmail(user.email, token);
 
   // * Sending Response
   return res
@@ -409,7 +409,7 @@ export const verifyAccountRequestController = asyncHandler(async (req, res) => {
     // * Sending Email with verification token
     const token = generate20CharToken();
     await generateVerifyEmailToken(user._id, token);
-    await verifyEmail(user.email, token);
+    // await verifyEmail(user.email, token);
 
     // * Sending Response
     return res
@@ -454,7 +454,7 @@ export const updateEmailController = asyncHandler(async (req, res) => {
     // * Send Verification email
     const token = generate20CharToken();
     await generateVerifyEmailToken(user._id, token);
-    await verifyEmail(user.email, token);
+    // await verifyEmail(user.email, token);
 
     // * Sending Response
     return res
