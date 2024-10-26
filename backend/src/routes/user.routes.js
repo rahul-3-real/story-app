@@ -10,6 +10,7 @@ import {
   forgotPasswordRequestController,
   resetPasswordController,
   verifyAccountController,
+  verifyAccountRequestController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 
@@ -28,5 +29,8 @@ router.route("/forgot-password-request").patch(forgotPasswordRequestController);
 router.route("/reset-password").patch(verifyUser, resetPasswordController);
 
 router.route("/verify-account").patch(verifyAccountController);
+router
+  .route("/verify-account-request")
+  .patch(verifyUser, verifyAccountRequestController);
 
 export default router;

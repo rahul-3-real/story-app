@@ -388,3 +388,36 @@ export const verifyAccountController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Account verified successfully!"));
 });
+
+// Verify Account Request Controller
+export const verifyAccountRequestController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get email from request user
+   * TODO: Check if already verified
+   * TODO: Sending Email with verification token
+   * TODO: Sending Response
+   * **/
+
+  // * Get email from request user
+  const user = req.user;
+
+  // * Check if already verified
+  if (user.verified) throw new ApiError(400, "Account already verified");
+
+  try {
+    // * Sending Email with verification token
+    const token = generate20CharToken();
+    await generateVerifyEmailToken(user._id, token);
+    await verifyEmail(user.email, token);
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Verification link sent to your email"));
+  } catch (error) {
+    throw new ApiError(
+      500,
+      error.message || "Failed to send verification email"
+    );
+  }
+});
