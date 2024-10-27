@@ -10,13 +10,18 @@ import { Dashboard } from "../pages/dashboard";
 import { Home } from "../pages/website";
 
 const AppRoutes = () => {
-  const isAuthenticated = false; // Replace with actual authentication logic
+  const isAuthenticated = false;
 
   const routes = createBrowserRouter([
     {
       path: "/",
       element: <WebsiteLayout />,
-      children: [{ path: "/", element: <Home /> }],
+      children: [
+        {
+          path: "/",
+          element: isAuthenticated ? <Home /> : <Navigate to="/login" />,
+        },
+      ],
     },
     {
       path: "/",

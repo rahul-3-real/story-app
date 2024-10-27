@@ -1,2 +1,37 @@
 @import url(./tailwind.config.css);
 @import url(./base.css);
+
+/* Auth Section */
+.auth-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--background);
+}
+.auth-section .image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.auth-section .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.auth-section .content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.auth-section .auth-content {
+  max-width: 400px;
+  width: 100%;
+}

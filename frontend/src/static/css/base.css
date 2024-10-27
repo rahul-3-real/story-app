@@ -10,6 +10,7 @@
 
   /* Colors */
   --primary: #46a8a8;
+  --secondary: #198383;
   --dark: #1e1e1e;
   --dark-alt: #303030;
   --light: #ffffff;
@@ -39,7 +40,7 @@
 }
 *::selection {
   background: transparent;
-  color: var(--foreground);
+  color: auto;
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -88,14 +89,26 @@ video {
   width: 100%;
 }
 p {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   color: var(--foreground-alt);
+  line-height: 150%;
+}
+p a {
+  font-weight: 400;
+  color: var(--primary);
+  transition: 0.5s ease all;
+}
+p a:hover {
+  color: var(--secondary);
 }
 
 /* Background */
 .bg-primary {
   background: var(--primary) !important;
+}
+.bg-secondary {
+  background: var(--secondary) !important;
 }
 .bg-light {
   background: var(--light) !important;
@@ -126,6 +139,9 @@ p {
 .text-primary {
   color: var(--primary) !important;
 }
+.text-secondary {
+  color: var(--secondary) !important;
+}
 .text-light {
   color: var(--light) !important;
 }
@@ -149,4 +165,95 @@ p {
 }
 .text-foreground-alt {
   color: var(--foreground-alt) !important;
+}
+
+/* Logo */
+.logo {
+  font-size: 45px;
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 100%;
+  color: var(--primary);
+  text-transform: capitalize;
+}
+
+/* Fonts */
+.heading {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--foreground);
+  text-transform: capitalize;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--light);
+  border-radius: 5px;
+  text-decoration: none;
+  border: 0;
+  outline: 0;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: 0.5s ease all;
+}
+.button:hover {
+  background-color: var(--secondary);
+}
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+/* Forms */
+.form-group {
+  display: block;
+  margin-bottom: 20px;
+  position: relative;
+}
+.form-group .form-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--foreground);
+  margin-bottom: 3px;
+}
+.form-group .form-control {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: var(--background);
+  border: 1px solid var(--background-alt);
+  border-radius: 5px;
+  outline: 0;
+  transition: 0.5s ease all;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  color: var(--foreground);
+}
+.form-group .form-control:focus {
+  border-color: var(--primary);
+}
+.form-group .form-control::placeholder {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.form-group .form-control[type="password"]::-ms-reveal,
+.form-group .form-control[type="password"]::-ms-clear {
+  display: none;
+}
+.form-group .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--foreground-alt);
 }
