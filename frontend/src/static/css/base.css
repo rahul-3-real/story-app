@@ -244,6 +244,7 @@ p a:hover {
   font-size: 14px;
   font-weight: 400;
   text-transform: capitalize;
+  color: #4e4e4e;
 }
 .form-group .form-control[type="password"]::-ms-reveal,
 .form-group .form-control[type="password"]::-ms-clear {
