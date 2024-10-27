@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   createBrowserRouter,
   Navigate,
@@ -10,7 +11,7 @@ import { Dashboard } from "../pages/dashboard";
 import { Home } from "../pages/website";
 
 const AppRoutes = () => {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const routes = createBrowserRouter([
     {
