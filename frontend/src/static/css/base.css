@@ -15,6 +15,7 @@
   --dark-alt: #303030;
   --light: #ffffff;
   --light-alt: #eaeaea;
+  --error: #ef4444;
 }
 [data-theme="light"] {
   /* Colors */
@@ -134,6 +135,9 @@ p a:hover {
 .bg-foreground-alt {
   background: var(--foreground-alt) !important;
 }
+.bg-error {
+  background: var(--error) !important;
+}
 
 /* Color */
 .text-primary {
@@ -165,6 +169,9 @@ p a:hover {
 }
 .text-foreground-alt {
   color: var(--foreground-alt) !important;
+}
+.text-error {
+  color: var(--error) !important;
 }
 
 /* Logo */
@@ -213,7 +220,7 @@ p a:hover {
 /* Forms */
 .form-group {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
 }
 .form-group .form-label {
@@ -234,7 +241,6 @@ p a:hover {
   transition: 0.5s ease all;
   font-size: 16px;
   font-weight: 400;
-  text-transform: capitalize;
   color: var(--foreground);
 }
 .form-group .form-control:focus {
@@ -257,4 +263,5 @@ p a:hover {
   transform: translateY(-50%);
   font-size: 20px;
   color: var(--foreground-alt);
+  cursor: pointer;
 }

@@ -10,7 +10,7 @@ const Input = ({ label, type, name, required, error, className, ...props }) => {
   return (
     <div className={`form-group ${className}`}>
       <label className="form-label" htmlFor={name}>
-        {label} {required && <span className="text-red-500">*</span>}
+        {label} {required && <span className="text-error">*</span>}
       </label>
       <div className="relative">
         <input
@@ -30,7 +30,7 @@ const Input = ({ label, type, name, required, error, className, ...props }) => {
           </span>
         )}
       </div>
-      {error && <span className="text-sm text-red-500">{error}</span>}
+      {error && <span className="text-sm text-error">{error}</span>}
     </div>
   );
 };
