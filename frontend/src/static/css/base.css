@@ -15,7 +15,7 @@
   --light: #ffffff;
   --light-alt: #eaeaea;
 }
-:root {
+[data-theme="light"] {
   /* Colors */
   --background: #ffffff;
   --background-alt: #eaeaea;
