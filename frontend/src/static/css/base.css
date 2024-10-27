@@ -1,0 +1,152 @@
+/* Imports */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+/* Variables */
+:root {
+  /* Fonts */
+  --serif: "Playfair Display", serif;
+  --sans-serif: "Poppins", sans-serif;
+
+  /* Colors */
+  --primary: #46a8a8;
+  --dark: #1e1e1e;
+  --dark-alt: #303030;
+  --light: #ffffff;
+  --light-alt: #eaeaea;
+}
+:root {
+  /* Colors */
+  --background: #ffffff;
+  --background-alt: #eaeaea;
+  --foreground: #1e1e1e;
+  --foreground-alt: #303030;
+}
+[data-theme="dark"] {
+  /* Colors */
+  --background: #1e1e1e;
+  --background-alt: #303030;
+  --foreground: #ffffff;
+  --foreground-alt: #eaeaea;
+}
+
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+*::selection {
+  background: transparent;
+  color: var(--foreground);
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--sans-serif);
+  background: var(--background);
+  overflow-x: hidden;
+  position: relative;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+b,
+i,
+u,
+ul,
+ol,
+li,
+span {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  color: var(--foreground-alt);
+}
+a:hover {
+  text-decoration: none;
+}
+img,
+video {
+  width: 100%;
+}
+p {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--foreground-alt);
+}
+
+/* Background */
+.bg-primary {
+  background: var(--primary) !important;
+}
+.bg-light {
+  background: var(--light) !important;
+}
+.bg-light-alt {
+  background: var(--light-alt) !important;
+}
+.bg-dark {
+  background: var(--dark) !important;
+}
+.bg-dark-alt {
+  background: var(--dark-alt) !important;
+}
+.bg-background {
+  background: var(--background) !important;
+}
+.bg-background-alt {
+  background: var(--background-alt) !important;
+}
+.bg-foreground {
+  background: var(--foreground) !important;
+}
+.bg-foreground-alt {
+  background: var(--foreground-alt) !important;
+}
+
+/* Color */
+.text-primary {
+  color: var(--primary) !important;
+}
+.text-light {
+  color: var(--light) !important;
+}
+.text-light-alt {
+  color: var(--light-alt) !important;
+}
+.text-dark {
+  color: var(--dark) !important;
+}
+.text-dark-alt {
+  color: var(--dark-alt) !important;
+}
+.text-background {
+  color: var(--background) !important;
+}
+.text-background-alt {
+  color: var(--background-alt) !important;
+}
+.text-foreground {
+  color: var(--foreground) !important;
+}
+.text-foreground-alt {
+  color: var(--foreground-alt) !important;
+}
