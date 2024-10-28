@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const ForgotPasswordEmailSent = () => {
+  // Page Title
+  useEffect(() => {
+    document.title = "Forgot Password Email Sent - Story App";
+  }, []);
+
   return (
     <div className="auth-content">
       <h1 className="logo mb-[50px]">

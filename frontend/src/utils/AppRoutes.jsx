@@ -11,6 +11,7 @@ import {
   Login,
   ForgotPassword,
   ForgotPasswordEmailSent,
+  ForgotPasswordRequest,
 } from "../pages/authentication";
 import { Dashboard } from "../pages/dashboard";
 import { Home } from "../pages/website";
@@ -59,6 +60,14 @@ const AppRoutes = () => {
             <Navigate to="/dashboard" />
           ) : (
             <ForgotPasswordEmailSent />
+          ),
+        },
+        {
+          path: "forgot-password-request",
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPasswordRequest />
           ),
         },
       ],

@@ -57,6 +57,25 @@ export const forgotPasswordEmailSchema = yup.object().shape({
     .required("This field is required"),
 });
 
+// Forgot Password Reset Schema Validation
+export const forgotPasswordResetSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(
+      6,
+      "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character (@ . _ - ! $), and must be at least 6 characters long"
+    )
+    .matches(passwordRules, {
+      message:
+        "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character (@ . _ - ! $), and must be at least 6 characters long",
+    })
+    .required("This field is required"),
+  password2: yup
+    .string()
+    .required("This field is required")
+    .oneOf([yup.ref("password")], "Password must match"),
+});
+
 // Email Schema Validation
 export const emailSchema = yup.object().shape({
   newEmail: yup
