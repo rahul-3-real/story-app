@@ -273,6 +273,36 @@ export const forgotPasswordController = asyncHandler(async (req, res) => {
 });
 
 // Forgot Password Request Controller
+export const forgotPasswordValidateTokenController = asyncHandler(
+  async (req, res) => {
+    /**
+     * TODO: Get token from URL
+     * TODO: Check if token is valid
+     * TODO: Sending Response
+     * **/
+
+    // * Get token from URL
+    const { token } = req.query;
+
+    // * Check if token is valid
+    const user = await User.findOne({ passwordResetToken: token });
+    if (!user) {
+      throw new ApiError(400, "Invalid token");
+    }
+
+    const currentDate = new Date();
+    if (currentDate > user.passwordResetTokenExpiry) {
+      throw new ApiError(400, "Password reset token has expired");
+    }
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Password reset token is valid"));
+  }
+);
+
+// Forgot Password Request Controller
 export const forgotPasswordRequestController = asyncHandler(
   async (req, res) => {
     /**

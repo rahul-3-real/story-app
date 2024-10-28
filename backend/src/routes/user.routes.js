@@ -15,6 +15,7 @@ import {
   updateProfileController,
   updateAvatarController,
   removeAvatarController,
+  forgotPasswordValidateTokenController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 import uploadMiddleware from "../middlewares/multer.middleware.js";
@@ -30,6 +31,9 @@ router.route("/refresh-access-token").post(refreshAccessTokenController);
 router.route("/profile").get(verifyUser, getUserProfileController);
 
 router.route("/forgot-password").post(forgotPasswordController);
+router
+  .route("/forgot-password-validate-token")
+  .get(forgotPasswordValidateTokenController);
 router.route("/forgot-password-request").patch(forgotPasswordRequestController);
 router.route("/reset-password").patch(verifyUser, resetPasswordController);
 
