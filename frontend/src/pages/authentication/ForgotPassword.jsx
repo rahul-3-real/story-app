@@ -1,26 +1,27 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Input } from "../../components/forms";
-import { login, setAuthError } from "../../store/slices/authSlice";
-import { loginSchema } from "../../utils/ValidationSchema";
+import { setAuthError } from "../../store/slices/authSlice";
+import { forgotPasswordEmailSchema } from "../../utils/ValidationSchema";
 
-const Login = () => {
+const ForgotPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Page Title
   useEffect(() => {
-    document.title = "Login - Story App";
+    document.title = "Forgot Password - Story App";
   }, []);
 
   // Submit Form
   const onSubmit = async (values, { setErrors, setSubmitting, resetForm }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/user/login`,
+        `${import.meta.env.VITE_API_BASE_URL}/user/forgot-password`,
         values,
         {
           headers: {
@@ -30,19 +31,17 @@ const Login = () => {
         }
       );
 
-      const token = response.data.data.accessToken;
-      dispatch(
-        login({
-          error: null,
-          user: response.data.data.user,
-          token,
-          tokenExpiration: response.data.tokenExpiration,
-        })
-      );
-      localStorage.setItem("authToken", token);
+      console.log(response.data.statusCode);
 
-      resetForm();
-      return token;
+      if (response.status === 200) {
+        navigate("/forgot-password-email-sent");
+        resetForm();
+        return;
+      } else {
+        const apiError = "An error occurred while making the request";
+        setErrors({ apiError });
+        dispatch(setAuthError(apiError));
+      }
     } catch (error) {
       setSubmitting(false);
       if (error.response) {
@@ -73,9 +72,8 @@ const Login = () => {
   } = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
-    validationSchema: loginSchema,
+    validationSchema: forgotPasswordEmailSchema,
     onSubmit,
   });
 
@@ -84,9 +82,10 @@ const Login = () => {
       <h1 className="logo mb-[50px]">
         Story <span>World</span>
       </h1>
-      <h2 className="heading mb-3">Welcome Back, Storyteller</h2>
+      <h2 className="heading mb-3">Recover Your Password</h2>
       <p className="mb-10">
-        Log in to continue your storytelling adventure and access your stories.
+        Enter your email to recieve instructions to reset your password
+        securely.
       </p>
 
       <form method="POST" onSubmit={handleSubmit}>
@@ -102,18 +101,6 @@ const Login = () => {
           error={touched.email && errors.email}
         />
 
-        <Input
-          type="password"
-          label="Password"
-          placeholder="Enter your Password"
-          id="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.password && errors.password}
-        />
-
         {errors.apiError && (
           <span className="block text-sm text-error mb-4">
             {errors.apiError}
@@ -125,19 +112,15 @@ const Login = () => {
           className="button button-block mb-5"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Submitting" : "Login To Your Account"}
+          {isSubmitting ? "Submitting" : "Send Password Reset Link"}
         </button>
 
-        <p className="mb-3">
-          Forgot Password? <Link to="/forgot-password">Reset</Link>
-        </p>
-
         <p>
-          Don't have an account? <Link to="/register">Sign Up</Link>
+          Don't have an account? <Link to="/login">Sign In</Link>
         </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPassword;

@@ -49,6 +49,14 @@ export const loginSchema = yup.object().shape({
     }),
 });
 
+// Forgot Password Email Schema Validation
+export const forgotPasswordEmailSchema = yup.object().shape({
+  email: yup
+    .string()
+    .matches(emailRules, "Please enter a valid email")
+    .required("This field is required"),
+});
+
 // Email Schema Validation
 export const emailSchema = yup.object().shape({
   newEmail: yup

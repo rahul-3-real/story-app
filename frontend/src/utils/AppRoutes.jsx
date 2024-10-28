@@ -6,7 +6,12 @@ import {
 } from "react-router-dom";
 
 import { WebsiteLayout, DashboardLayout, AuthLayout } from "../layouts";
-import { Register, Login } from "../pages/authentication";
+import {
+  Register,
+  Login,
+  ForgotPassword,
+  ForgotPasswordEmailSent,
+} from "../pages/authentication";
 import { Dashboard } from "../pages/dashboard";
 import { Home } from "../pages/website";
 
@@ -39,6 +44,22 @@ const AppRoutes = () => {
         {
           path: "login",
           element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login />,
+        },
+        {
+          path: "forgot-password",
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPassword />
+          ),
+        },
+        {
+          path: "forgot-password-email-sent",
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPasswordEmailSent />
+          ),
         },
       ],
     },
