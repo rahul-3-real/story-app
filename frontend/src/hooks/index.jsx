@@ -1,3 +1,4 @@
 import useTheme from "./useTheme";
+import useToggleSidebar from "./useToggleSidebar";
 
-export { useTheme };
+export { useTheme, useToggleSidebar };

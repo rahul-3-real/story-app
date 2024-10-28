@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 // Serve static files
 app.use(express.static("public"));
-app.use(express.static(process.env.MEDIA_UPLOAD_FOLDER));
+app.use("/static", express.static(process.env.MEDIA_UPLOAD_FOLDER));
 
 // Routes
 app.use("/api/user", userRouter);

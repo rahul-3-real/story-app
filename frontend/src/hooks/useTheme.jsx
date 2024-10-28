@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useTheme(defaultMode = "dark") {
+const useTheme = (defaultMode = "dark") => {
   // Check local storage for theme mode or set it to the default
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem("Theme Mode");
@@ -27,6 +27,6 @@ function useTheme(defaultMode = "dark") {
   };
 
   return { themeMode, changeTheme };
-}
+};
 
 export default useTheme;

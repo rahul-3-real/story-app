@@ -52,7 +52,6 @@
   left: 0;
   width: 300px;
   height: 100vh;
-  overflow: hidden;
   border-right: 1px solid var(--background-alt);
   transition: 0.5s ease all;
 }
@@ -77,6 +76,151 @@
 /* Sidebar */
 .db-sidebar {
   transition: 0.5s ease all;
+}
+.db-sidebar .toggle {
+  position: absolute;
+  top: 60px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-alt);
+  font-size: 16px;
+  color: var(--foreground);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.5s ease all;
+  z-index: 2;
+  transform: rotate(180deg);
+}
+.db-wrapper.collapsed .db-sidebar .toggle {
+  transform: rotate(0);
+}
+.db-sidebar .toggle:hover {
+  background-color: var(--primary);
+}
+.db-sidebar .content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow: hidden;
+}
+.db-sidebar .content .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+.db-sidebar .actions .profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+.db-sidebar .actions .profile a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.db-sidebar .actions .profile a img {
+  width: 59px;
+  border-radius: 5px;
+}
+.db-sidebar .actions .profile a span {
+  width: calc(100% - 80px);
+  transition: 0.5s ease all;
+  opacity: 1;
+  margin-left: 20px;
+}
+.db-wrapper.collapsed .db-sidebar .actions .profile a span {
+  width: 0;
+  opacity: 0;
+  margin-left: 0;
+}
+.db-sidebar .actions .profile a span b {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.db-sidebar .actions .profile a span i {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--primary);
+  font-style: normal;
+}
+.db-sidebar .actions .profile .logout {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary);
+  color: var(--light);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease all;
+  opacity: 1;
+  margin-left: 20px;
+}
+.db-sidebar .actions .profile .logout svg {
+  width: 25px;
+  height: 25px;
+}
+.db-wrapper.collapsed .db-sidebar .actions .profile .logout {
+  width: 0;
+  opacity: 0;
+  margin-left: 0;
+}
+.db-sidebar .db-nav {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.db-sidebar .db-nav .nav-item .nav-link,
+.db-sidebar .actions .theme-switch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+  color: var(--foreground);
+}
+.db-sidebar .db-nav .nav-item .nav-link.active {
+  color: var(--primary);
+}
+.db-sidebar .db-nav .nav-item .nav-link .icon,
+.db-sidebar .actions .theme-switch .icon {
+  width: 59px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+.db-sidebar .db-nav .nav-item .nav-link span,
+.db-sidebar .actions .theme-switch span {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 1;
+  transition: 0.5s ease all;
+  margin-left: 20px;
+  width: calc(100% - 79px);
+  text-align: left;
+}
+.db-wrapper.collapsed .db-sidebar .db-nav .nav-item .nav-link span,
+.db-wrapper.collapsed .db-sidebar .actions .theme-switch span {
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
 }
 
 /* * Dashboard Pages */

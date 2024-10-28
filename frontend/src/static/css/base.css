@@ -81,7 +81,6 @@ span {
   padding: 0;
   list-style: none;
   text-decoration: none;
-  color: var(--foreground-alt);
 }
 a:hover {
   text-decoration: none;
@@ -274,6 +273,9 @@ p a:hover {
   font-weight: 700;
   line-height: 100%;
   color: var(--primary);
+  white-space: nowrap;
+  transition: 0.5s ease all;
+  padding-left: 10px;
 }
 .db-logo span {
   color: var(--foreground);
