@@ -266,3 +266,15 @@ p a:hover {
   color: var(--foreground-alt);
   cursor: pointer;
 }
+
+/* Dashboard */
+.db-logo {
+  font-size: 25px;
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 100%;
+  color: var(--primary);
+}
+.db-logo span {
+  color: var(--foreground);
+}

@@ -1,7 +1,7 @@
 @import url(./tailwind.config.css);
 @import url(./base.css);
 
-/* Auth Section */
+/* * Auth Section */
 .auth-section {
   position: relative;
   display: grid;
@@ -35,8 +35,53 @@
   max-width: 400px;
   width: 100%;
 }
+/* * Auth Section */
 
-/* Responsive */
+/* * Dashboard Pages */
+.db-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: auto;
+  height: 100vh;
+  overflow: hidden;
+}
+.db-wrapper .db-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  overflow: hidden;
+  border-right: 1px solid var(--background-alt);
+  transition: 0.5s ease all;
+}
+.db-wrapper.collapsed .db-sidebar {
+  width: 100px;
+}
+.db-wrapper .db-content {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  width: calc(100% - 300px);
+  height: 100vh;
+  overflow: hidden;
+  border-right: 1px solid var(--background-alt);
+  transition: 0.5s ease all;
+}
+.db-wrapper.collapsed .db-content {
+  width: calc(100% - 100px);
+  left: 100px;
+}
+
+/* Sidebar */
+.db-sidebar {
+  transition: 0.5s ease all;
+}
+
+/* * Dashboard Pages */
+
+/* * Responsive */
 @media (max-width: 1200px) {
 }
 

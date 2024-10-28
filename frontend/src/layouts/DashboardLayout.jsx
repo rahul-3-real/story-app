@@ -1,10 +1,15 @@
 import { Outlet } from "react-router-dom";
+import { Sidebar } from "../components/dashboard";
 
 const DashboardLayout = () => {
   return (
-    <>
-      <Outlet />
-    </>
+    <div className="db-wrapper">
+      <Sidebar />
+
+      <div className="db-content">
+        <Outlet />
+      </div>
+    </div>
   );
 };
 
