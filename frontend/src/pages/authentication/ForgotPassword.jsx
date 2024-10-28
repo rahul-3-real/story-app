@@ -31,8 +31,6 @@ const ForgotPassword = () => {
         }
       );
 
-      console.log(response.data.statusCode);
-
       if (response.status === 200) {
         navigate("/forgot-password-email-sent");
         resetForm();
