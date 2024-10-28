@@ -17,6 +17,7 @@
   --light-alt: #eaeaea;
   --error: #ef4444;
 }
+:root,
 [data-theme="light"] {
   /* Colors */
   --background: #ffffff;
@@ -40,7 +41,7 @@
   box-sizing: border-box;
 }
 *::selection {
-  background: transparent;
+  background: var(--background-alt);
   color: auto;
 }
 ::-webkit-scrollbar {

@@ -19,6 +19,9 @@ const Input = ({ label, type, name, required, error, className, ...props }) => {
           id={name}
           name={name}
           required={required}
+          onCopy={(e) => e.preventDefault()}
+          onCut={(e) => e.preventDefault()}
+          onPaste={(e) => e.preventDefault()}
           {...props}
         />
         {type === "password" && (

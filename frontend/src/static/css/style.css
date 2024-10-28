@@ -35,3 +35,39 @@
   max-width: 400px;
   width: 100%;
 }
+
+/* Responsive */
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+  .logo {
+    font-size: 40px;
+  }
+  .heading {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo {
+    font-size: 30px;
+  }
+  .heading {
+    font-size: 23px;
+  }
+  .auth-section {
+    display: block;
+    height: auto;
+  }
+  .auth-section .image {
+    height: 200px;
+  }
+  .auth-section .content {
+    padding: 50px 30px;
+    height: auto;
+  }
+}
+
+@media (max-width: 550px) {
+}
