@@ -1,16 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BsGrid, BsHeart, BsFilter, BsChevronRight } from "react-icons/bs";
 import { IoSunny, IoSunnyOutline, IoLogOutOutline } from "react-icons/io5";
 
-import { useTheme } from "../../hooks";
+import { useTheme, useLogoutUser } from "../../hooks";
 import { DummyProfile } from "../../static/images";
-import { logout } from "../../store/slices/authSlice";
 
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const { themeMode, changeTheme } = useTheme();
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = useLogoutUser();
 
   const imageUrl = user?.avatar
     ? `${import.meta.env.VITE_API_DOMAIN}/static/${user.avatar.replace(
@@ -83,11 +83,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                 <i>View Profile</i>
               </span>
             </NavLink>
-            <button
-              className="logout"
-              title="Logout"
-              onClick={() => dispatch(logout())}
-            >
+            <button className="logout" title="Logout" onClick={handleLogout}>
               <IoLogOutOutline />
             </button>
           </div>
