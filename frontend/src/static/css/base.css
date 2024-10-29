@@ -30,7 +30,8 @@
   --background: #1e1e1e;
   --background-alt: #303030;
   --foreground: #ffffff;
-  --foreground-alt: #eaeaea;
+  /* --foreground-alt: #eaeaea; */
+  --foreground-alt: #d1d1d1;
 }
 
 /* Default */
@@ -211,7 +212,7 @@ p a:hover {
   color: var(--light);
   border-radius: 5px;
   text-decoration: none;
-  border: 0;
+  border: 1px solid var(--primary);
   outline: 0;
   text-align: center;
   cursor: pointer;
@@ -222,10 +223,23 @@ p a:hover {
 }
 .button:hover {
   background-color: var(--secondary);
+  border: 1px solid var(--secondary);
 }
 .button-block {
   display: block;
   width: 100%;
+}
+.button-outline {
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--primary);
+}
+.button-outline:hover {
+  color: var(--light);
+}
+.button-sm {
+  padding: 7px 15px;
+  font-size: 14px;
 }
 
 /* Forms */
