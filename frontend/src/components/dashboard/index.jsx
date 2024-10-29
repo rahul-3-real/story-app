@@ -4,4 +4,6 @@ import HeaderTitle from "./HeaderTitle";
 import SearchForm from "./SearchForm";
 import Sidebar from "./Sidebar";
 
-export { Sidebar, Header, SearchForm, HeaderTitle, Breadcrumb };
+import ProfileContent from "./profile/ProfileContent";
+
+export { Sidebar, Header, SearchForm, HeaderTitle, Breadcrumb, ProfileContent };
