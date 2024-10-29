@@ -13,7 +13,7 @@ import {
   ForgotPasswordEmailSent,
   ForgotPasswordRequest,
 } from "../pages/authentication";
-import { Dashboard } from "../pages/dashboard";
+import { Dashboard, Profile } from "../pages/dashboard";
 import { Home } from "../pages/website";
 
 const AppRoutes = () => {
@@ -75,7 +75,10 @@ const AppRoutes = () => {
     {
       path: "/",
       element: isAuthenticated ? <DashboardLayout /> : <Navigate to="/login" />,
-      children: [{ path: "/dashboard", element: <Dashboard /> }],
+      children: [
+        { path: "/dashboard", element: <Dashboard /> },
+        { path: "/profile", element: <Profile /> },
+      ],
     },
   ]);
 
