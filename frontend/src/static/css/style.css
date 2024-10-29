@@ -319,6 +319,54 @@
   color: var(--primary);
 }
 
+/* Breadcrumb */
+.db-breadcrumb {
+  position: relative;
+  border: 1px solid var(--background-alt);
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 13px 20px;
+}
+.db-breadcrumb .back-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--foreground);
+  transition: 0.5s ease all;
+}
+.db-breadcrumb .back-button:hover {
+  color: var(--primary);
+}
+.db-breadcrumb .breadcrumb-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+.db-breadcrumb .breadcrumb-menu .breadcrumb-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+.db-breadcrumb .breadcrumb-menu .breadcrumb-item svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--foreground);
+  opacity: 0.2;
+}
+.db-breadcrumb .breadcrumb-menu .breadcrumb-item .breadcrumb-link {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.db-breadcrumb .breadcrumb-menu .breadcrumb-item .breadcrumb-link.active {
+  color: var(--primary);
+}
+
 /* * Dashboard Pages */
 
 /* * Responsive */
