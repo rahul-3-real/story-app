@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../components/dashboard";
+import { Sidebar, Header } from "../components/dashboard";
 import { useToggleSidebar } from "../hooks";
 
 const DashboardLayout = () => {
@@ -10,6 +10,7 @@ const DashboardLayout = () => {
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       <div className="db-content">
+        <Header />
         <Outlet />
       </div>
     </div>

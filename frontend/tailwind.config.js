@@ -7,6 +7,12 @@ export default {
       sans: ["Poppins"],
       serif: ["Playfair Display"],
     },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "2rem",
+      },
+    },
   },
   plugins: [],
 };
