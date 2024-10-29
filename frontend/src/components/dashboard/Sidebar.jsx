@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { MdVerified } from "react-icons/md";
 import { BsGrid, BsHeart, BsFilter, BsChevronRight } from "react-icons/bs";
 import { IoSunny, IoSunnyOutline, IoLogOutOutline } from "react-icons/io5";
 
@@ -79,7 +80,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
             <NavLink to="/profile">
               <img src={imageUrl} alt={user.full_name} />
               <span>
-                <b>{user.full_name}</b>
+                <b>
+                  {user.full_name} {!user.verified && <MdVerified />}
+                </b>
                 <i>View Profile</i>
               </span>
             </NavLink>

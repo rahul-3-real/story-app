@@ -145,10 +145,18 @@
   margin-left: 0;
 }
 .db-sidebar .actions .profile a span b {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
   font-size: 16px;
   font-weight: 400;
   color: var(--foreground);
+}
+.db-sidebar .actions .profile a span b svg {
+  height: 14px;
+  width: 14px;
+  fill: var(--primary);
 }
 .db-sidebar .actions .profile a span i {
   display: block;
