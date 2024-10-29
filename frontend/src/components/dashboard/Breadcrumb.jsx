@@ -5,7 +5,7 @@ const Breadcrumb = ({ data }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="db-breadcrumb mb-5">
+    <div className="db-breadcrumb mb-7">
       <div className="grid grid-cols-4">
         <div className="col-span-3">
           <ul className="breadcrumb-menu">

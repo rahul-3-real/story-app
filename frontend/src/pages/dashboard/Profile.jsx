@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { MdOutlineModeEdit } from "react-icons/md";
+import { TbNotes, TbHeart } from "react-icons/tb";
+import { FiUser } from "react-icons/fi";
 
 import { Breadcrumb, ProfileContent } from "../../components/dashboard";
 
@@ -18,10 +19,29 @@ const Profile = () => {
 
       <ProfileContent user={user} />
 
-      <Link to="/profile/edit">
-        <MdOutlineModeEdit />
-        <span>Edit Profile</span>
-      </Link>
+      <ul className="db-tab">
+        <li className="tab-item">
+          <NavLink to="/profile" className="tab-link">
+            <FiUser />
+            <span>About</span>
+          </NavLink>
+        </li>
+        <li className="tab-item">
+          <NavLink to="/profile/created" className="tab-link">
+            <TbNotes />
+            <span>Created</span>
+          </NavLink>
+        </li>
+        <li className="tab-item">
+          <NavLink to="/profile/favourites" className="tab-link">
+            <TbHeart />
+            <span>Favourites</span>
+          </NavLink>
+        </li>
+      </ul>
+      <div className="db-tab-content">
+        <Outlet />
+      </div>
     </div>
   );
 };

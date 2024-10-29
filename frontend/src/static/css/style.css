@@ -429,6 +429,60 @@
   gap: 15px;
 }
 
+/* DB Tabs */
+.db-tab {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  overflow-x: auto;
+  position: relative;
+}
+.db-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--background-alt);
+  z-index: -1;
+}
+.db-tab .tab-item .tab-link {
+  position: relative;
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--foreground-alt);
+  transition: 0.5s ease all;
+}
+.db-tab .tab-item .tab-link.active {
+  color: var(--primary);
+}
+.db-tab .tab-item .tab-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: var(--primary);
+  transition: 0.5s ease all;
+}
+.db-tab-content {
+  padding: 20px 0;
+}
+
+/* Profile About */
+.profile-about tr:last-child td,
+.profile-about tr:last-child th {
+  border: 0;
+}
+
 /* * Dashboard Pages */
 
 /* * Responsive */

@@ -81,7 +81,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
               <img src={imageUrl} alt={user.full_name} />
               <span>
                 <b>
-                  {user.full_name} {!user.verified && <MdVerified />}
+                  {user.full_name} {user.verified && <MdVerified />}
                 </b>
                 <i>View Profile</i>
               </span>

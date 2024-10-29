@@ -206,7 +206,10 @@ p a:hover {
 
 /* Buttons */
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 10px 20px;
   background-color: var(--primary);
   color: var(--light);
@@ -303,5 +306,41 @@ p a:hover {
   padding-left: 10px;
 }
 .db-logo span {
+  color: var(--foreground);
+}
+
+/* Table */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table td,
+.table th {
+  border-bottom: 1px solid var(--background-alt);
+  padding: 8px;
+  text-align: left;
+  padding: 10px;
+}
+.table th {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+}
+.table td {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--foreground);
+}
+.table-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.table-caption h5 {
+  font-size: 20px;
+  font-weight: 600;
   color: var(--foreground);
 }

@@ -12,7 +12,7 @@ const ProfileContent = ({ user }) => {
     : DummyProfile;
 
   return (
-    <div className="profile-content">
+    <div className="profile-content mb-7">
       <div className="profile-image">
         <img src={imageUrl} alt={user.full_name} />
       </div>
@@ -23,7 +23,7 @@ const ProfileContent = ({ user }) => {
         </div>
 
         <h2>
-          {user.full_name} {!user.verified && <MdVerified title="Verified" />}
+          {user.full_name} {user.verified && <MdVerified title="Verified" />}
         </h2>
 
         <div className="follow-list">
