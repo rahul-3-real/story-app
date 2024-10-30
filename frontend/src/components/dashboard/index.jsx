@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 
 import ProfileContent from "./profile/ProfileContent";
 import ProfileAbout from "./profile/ProfileAbout";
+import ProfileEdit from "./profile/ProfileEdit";
 
 export {
   Sidebar,
@@ -15,4 +16,5 @@ export {
   Breadcrumb,
   ProfileContent,
   ProfileAbout,
+  ProfileEdit,
 };

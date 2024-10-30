@@ -39,7 +39,7 @@ const HeaderTitle = () => {
   ];
 
   const currentPage =
-    pageHeaders.find((page) => page.path === location.pathname) ||
+    pageHeaders.find((page) => location.pathname.startsWith(page.path)) ||
     pageHeaders[0];
 
   return (

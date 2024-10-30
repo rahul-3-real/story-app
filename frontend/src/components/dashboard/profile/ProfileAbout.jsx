@@ -11,7 +11,7 @@ const ProfileAbout = () => {
     <div className="profile-about">
       <caption className="table-caption">
         <h5>Details About Your Profile</h5>
-        <Link className="button button-outline button-sm">
+        <Link to="/profile/edit" className="button button-outline button-sm">
           <HiOutlinePencil />
           <span>Edit Profile</span>
         </Link>
