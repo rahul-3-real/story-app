@@ -26,7 +26,7 @@ const Input = ({ label, type, name, required, error, className, ...props }) => {
         />
         {type === "password" && (
           <span
-            className="toggle-password"
+            className="toggle-control"
             onClick={handleTogglePasswordVisibility}
           >
             {showPassword ? <VscEyeClosed /> : <VscEye />}

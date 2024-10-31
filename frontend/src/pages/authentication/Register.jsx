@@ -73,6 +73,7 @@ const Register = () => {
   } = useFormik({
     initialValues: {
       full_name: "",
+      username: "",
       email: "",
       password: "",
       password2: "",
@@ -102,6 +103,18 @@ const Register = () => {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.full_name && errors.full_name}
+        />
+
+        <Input
+          type="text"
+          label="Username"
+          placeholder="Enter your Username"
+          id="username"
+          name="username"
+          value={values.username}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={touched.username && errors.username}
         />
 
         <Input

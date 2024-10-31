@@ -7,9 +7,19 @@ const passwordRules =
 // Email Rule
 const emailRules = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+// Define username validation regex
+const usernameRules = /^[a-z0-9._-]{4,20}$/;
+
 // Register Schema Validation
 export const registerSchema = yup.object().shape({
   full_name: yup.string().required("This field is required"),
+  username: yup
+    .string()
+    .matches(
+      usernameRules,
+      "Username must be 4-20 characters and contain only lowercase letters, numbers, or . _ -"
+    )
+    .required("This field is required"),
   email: yup
     .string()
     .matches(emailRules, "Please enter a valid email")
