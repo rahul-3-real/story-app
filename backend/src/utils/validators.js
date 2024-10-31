@@ -105,3 +105,8 @@ export const minimumAgeValidation = (date_of_birth, minAge) => {
     throw new ApiError(400, `User must be at least ${minAge} years old.`);
   }
 };
+
+// Is Email Validation
+export const isEmailValidation = (input) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+};

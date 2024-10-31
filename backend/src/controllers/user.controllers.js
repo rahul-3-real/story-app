@@ -7,6 +7,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import {
   compareFieldValidation,
   emailValidation,
+  isEmailValidation,
   minimumAgeValidation,
   minLengthValidation,
   notEmptyValidation,
@@ -110,20 +111,23 @@ export const loginController = asyncHandler(async (req, res) => {
    * **/
 
   // * Get data from Frontend
-  const { email, password } = req.body;
+  const { identifier, password } = req.body;
 
   // * Validate data
-  notEmptyValidation([email, password]);
-  emailValidation(email);
+  notEmptyValidation([identifier, password]);
   passwordValidation(password);
 
+  const isEmail = isEmailValidation(identifier);
+
   // * Check if user exists
-  const userExist = await User.findOne({ email }).select("password");
-  if (!userExist) throw new ApiError(401, "Invalid email or password");
+  const userType = isEmail ? { email: identifier } : { username: identifier };
+  const userExist = await User.findOne(userType).select("password");
+  if (!userExist) throw new ApiError(401, "Invalid email/username or password");
 
   // * Check Password
   const isPasswordCorrect = await userExist.checkPassword(password);
-  if (!isPasswordCorrect) throw new ApiError(401, "Invalid email or password");
+  if (!isPasswordCorrect)
+    throw new ApiError(401, "Invalid email/username or password");
 
   // * Generate token
   const { accessToken, refreshToken } = await generateAccessRefreshToken(
