@@ -11,6 +11,7 @@ import {
   minLengthValidation,
   notEmptyValidation,
   passwordValidation,
+  usernameValidation,
 } from "../utils/validators.js";
 import {
   options,
@@ -39,21 +40,30 @@ export const registerController = asyncHandler(async (req, res) => {
    * **/
 
   // * Get data from Frontend
-  const { full_name, email, password, password2 } = req.body;
+  const { full_name, username, email, password, password2 } = req.body;
 
   // * Validate data
-  notEmptyValidation([full_name, email, password, password2]);
+  notEmptyValidation([full_name, username, email, password, password2]);
   minLengthValidation(full_name, 3, "Full Name");
+  usernameValidation(username);
   emailValidation(email);
   passwordValidation(password);
   compareFieldValidation(password, password2, "Password does not match");
 
   // * Check if user exists
-  const existingUser = await User.findOne({ email });
-  if (existingUser) throw new ApiError(409, "Email already exists");
+  const existingEmail = await User.findOne({ email });
+  if (existingEmail) throw new ApiError(409, "Email already exists");
+
+  const existingUsername = await User.findOne({ username });
+  if (existingUsername) throw new ApiError(409, "Username already exists");
 
   // * Create User
-  const createdUser = await User.create({ full_name, email, password });
+  const createdUser = await User.create({
+    full_name,
+    username,
+    email,
+    password,
+  });
 
   // * Check if user is created
   const user = await User.findById(createdUser._id);

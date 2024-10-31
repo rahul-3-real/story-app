@@ -1,5 +1,19 @@
 import ApiError from "./apiError.js";
 
+// Username Validation
+export const usernameValidation = (username) => {
+  const usernameRegex = /^[a-z0-9]+([._-][a-z0-9]+)*$/;
+
+  if (!usernameRegex.test(username)) {
+    throw new ApiError(
+      400,
+      "Username should only contain lowercase letters, numbers, and the characters (_ - .)"
+    );
+  }
+
+  return username;
+};
+
 // Email Validation
 export const emailValidation = (email) => {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
