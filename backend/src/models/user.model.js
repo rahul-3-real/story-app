@@ -5,6 +5,17 @@ import mongoose from "mongoose";
 // User Schema
 const UserSchema = new mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      minlength: 4,
+      maxlength: 20,
+      match: /^[a-z0-9._-]+$/,
+      message:
+        "Username must contain only lowercase letters, numbers, and the characters ., _, - and be between 4 and 20 characters long",
+      trim: true,
+    },
     email: {
       type: String,
       required: true,
