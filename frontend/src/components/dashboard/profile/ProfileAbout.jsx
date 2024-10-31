@@ -9,13 +9,13 @@ const ProfileAbout = () => {
 
   return (
     <div className="profile-about">
-      <caption className="table-caption">
+      <div className="table-caption">
         <h5>Details About Your Profile</h5>
         <Link to="/profile/edit" className="button button-outline button-sm">
           <HiOutlinePencil />
           <span>Edit Profile</span>
         </Link>
-      </caption>
+      </div>
       <table className="table">
         <tbody>
           {user.full_name && (

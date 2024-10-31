@@ -1,8 +1,15 @@
+import ProfileEmailUpdate from "./ProfileEmailUpdate";
+
 const ProfileEdit = () => {
   return (
-    <div>
+    <>
       <h4 className="heading">Edit Profile</h4>
-    </div>
+      <hr className="heading-divider" />
+
+      <ProfileEmailUpdate />
+
+      <hr className="heading-divider !my-10" />
+    </>
   );
 };
 
