@@ -43,9 +43,9 @@ export const registerSchema = yup.object().shape({
 
 // Login Schema Validation
 export const loginSchema = yup.object().shape({
-  email: yup
+  identifier: yup
     .string()
-    .matches(emailRules, "Please enter a valid email")
+    .min(4, "Email / Username should be atleast 4 characters long")
     .required("This field is required"),
   password: yup
     .string()

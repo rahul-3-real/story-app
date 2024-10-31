@@ -91,15 +91,15 @@ const Login = () => {
 
       <form method="POST" onSubmit={handleSubmit}>
         <Input
-          type="email"
-          label="Email"
-          placeholder="Enter your Email Id."
-          id="email"
-          name="email"
-          value={values.email}
+          type="text"
+          label="Email / Username"
+          placeholder="Enter your Email / Username"
+          id="identifier"
+          name="identifier"
+          value={values.identifier}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={touched.email && errors.email}
+          error={touched.identifier && errors.identifier}
         />
 
         <Input
