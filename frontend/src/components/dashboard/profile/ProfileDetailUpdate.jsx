@@ -4,26 +4,28 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { Input } from "../../forms";
-import { emailSchema } from "../../../utils/ValidationSchema";
+import { Input, Select } from "../../forms";
+import { profileSchema } from "../../../utils/ValidationSchema";
 import { showAlert } from "../../../store/slices/alertSlice";
 import { updateProfile, setAuthError } from "../../../store/slices/authSlice";
+import { FormatInputDate } from "../../../utils/FormatDate";
 
-const ProfileEmailUpdate = ({ user }) => {
+const ProfileDetailUpdate = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isUpdated, setIsUpdated] = useState(false);
 
   const initialValues = {
-    newEmail: user?.email || "",
+    full_name: user?.full_name || "",
+    date_of_birth: FormatInputDate(user?.date_of_birth) || "",
+    gender: user?.gender || "",
   };
 
-  // Submit Form
   const onSubmit = async (values, { setErrors, setSubmitting, resetForm }) => {
     try {
       const response = await axios.patch(
-        `${import.meta.env.VITE_API_BASE_URL}/user/update-email`,
+        `${import.meta.env.VITE_API_BASE_URL}/user/update-profile`,
         values,
         {
           headers: {
@@ -33,26 +35,18 @@ const ProfileEmailUpdate = ({ user }) => {
         }
       );
 
-      console.log(response.data.data);
+      dispatch(updateProfile(response.data.data));
 
-      dispatch(
-        updateProfile({
-          error: null,
-          user: response.data.data.user,
-        })
-      );
       dispatch(
         showAlert({
           message: response.data.message,
           type: "success",
         })
       );
-
       resetForm();
       setIsUpdated(true);
       setTimeout(() => setIsUpdated(false), 3000);
       navigate("/profile");
-      return;
     } catch (error) {
       setSubmitting(false);
       if (error.response) {
@@ -71,13 +65,13 @@ const ProfileEmailUpdate = ({ user }) => {
     }
   };
 
-  // Formik Form
   const formik = useFormik({
     initialValues,
-    validationSchema: emailSchema,
+    validationSchema: profileSchema,
     onSubmit,
     enableReinitialize: true,
   });
+
   const {
     values,
     errors,
@@ -90,33 +84,63 @@ const ProfileEmailUpdate = ({ user }) => {
 
   return (
     <>
-      <h4 className="sub-heading">Email Update</h4>
-      <p className="text-sm text-error mt-1 mb-7">
-        Please note, updating your email will unverify your account. You will
-        need to verify your new email address to regain full access.
-      </p>
+      <h4 className="sub-heading mb-7">Profile Update</h4>
       <form method="POST" onSubmit={handleSubmit}>
-        <Input
-          type="email"
-          label="Email"
-          placeholder="Enter your Email Id."
-          id="email"
-          name="newEmail"
-          value={values.newEmail}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.newEmail && errors.newEmail}
-          required
-        />
+        <div className="grid grid-cols-2 sm:gird-cols-1 gap-5">
+          <div className="col">
+            <Input
+              type="text"
+              label="Full Name"
+              placeholder="Enter your Full Name"
+              id="full_name"
+              name="full_name"
+              value={values.full_name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.full_name && errors.full_name}
+              required
+            />
+          </div>
+
+          <div className="col">
+            <Select
+              label="Gender"
+              name="gender"
+              value={values.gender}
+              options={[
+                { label: "Male", value: "Male" },
+                { label: "Female", value: "Female" },
+                { label: "Other", value: "Other" },
+              ]}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.gender && errors.gender}
+            />
+          </div>
+
+          <div className="col">
+            <Input
+              type="date"
+              label="Date of Birth"
+              placeholder="Enter your Date of Birth."
+              id="date_of_birth"
+              name="date_of_birth"
+              value={values.date_of_birth}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.date_of_birth && errors.date_of_birth}
+            />
+          </div>
+        </div>
 
         <button type="submit" className="button" disabled={isSubmitting}>
-          <span>{isSubmitting ? "Updating..." : "Update Email"}</span>
+          <span>{isSubmitting ? "Updating..." : "Update Details"}</span>
         </button>
       </form>
 
       {isUpdated && (
         <div className="text-md text-success mt-4">
-          Email updated successfully!
+          Profile updated successfully!
         </div>
       )}
 
@@ -127,4 +151,4 @@ const ProfileEmailUpdate = ({ user }) => {
   );
 };
 
-export default ProfileEmailUpdate;
+export default ProfileDetailUpdate;

@@ -83,3 +83,16 @@ export const emailSchema = yup.object().shape({
     .matches(emailRules, "Please enter a valid email")
     .required("This field is required"),
 });
+
+// Profile Schema Validation
+export const profileSchema = yup.object().shape({
+  full_name: yup.string().required("Full name is required"),
+  date_of_birth: yup
+    .date()
+    .max(new Date(), "Date of birth cannot be in the future")
+    .nullable(true),
+  gender: yup
+    .string()
+    .oneOf(["Male", "Female", "Other"], "Invalid gender")
+    .nullable(true),
+});
