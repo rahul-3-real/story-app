@@ -371,9 +371,13 @@
 /* Profile Page */
 .profile-content {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: flex-start;
   gap: 1.5rem;
+  border: 1px solid var(--background-alt);
+  border-radius: 5px;
+  padding: 20px;
+  background: var(--background-alt);
 }
 .profile-content .profile-image {
   width: 170px;
@@ -383,29 +387,34 @@
 }
 .profile-content .profile-info {
   position: relative;
-  width: calc(100% - 170px - 1.5rem);
+  width: calc(100% - 170px - 300px - 3rem);
 }
-.profile-content .profile-info h2 {
-  font-size: 30px;
+.profile-content .profile-info .username {
+  font-size: 16px;
   font-weight: 600;
-  color: var(--foreground);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 15px;
   line-height: 100%;
 }
-.profile-content .profile-info h2 svg {
-  height: 16px;
-  width: 16px;
+.profile-content .profile-info .username svg {
+  height: 14px;
+  width: 14px;
   fill: var(--primary);
+}
+.profile-content .profile-info h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 100%;
 }
 .profile-content .profile-info .follow-list {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 30px;
-  margin: 25px 0;
 }
 .profile-content .profile-info .follow-list .follow-link {
   font-size: 16px;
@@ -419,65 +428,20 @@
   margin-right: 3px;
   display: inline-block;
 }
-.profile-content .profile-info .profile-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
+.profile-content .profile-actions {
+  width: 300px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
-/* DB Tabs */
-.db-tab {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  overflow-x: auto;
-  position: relative;
-}
-.db-tab::after {
-  content: "";
-  position: absolute;
-  bottom: 1px;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background-color: var(--background-alt);
-  z-index: -1;
-}
-.db-tab .tab-item .tab-link {
-  position: relative;
-  padding: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--foreground-alt);
-  transition: 0.5s ease all;
-}
-.db-tab .tab-item .tab-link.active {
-  color: var(--primary);
-}
-.db-tab .tab-item .tab-link.active::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background-color: var(--primary);
-  transition: 0.5s ease all;
-}
-.db-tab-content {
-  padding: 20px 0;
-}
-
 /* Profile About */
+.profile-about tr td,
+.profile-about tr th {
+  padding-inline: 0;
+}
 .profile-about tr:last-child td,
 .profile-about tr:last-child th {
   border: 0;

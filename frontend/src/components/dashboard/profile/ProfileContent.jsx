@@ -17,16 +17,12 @@ const ProfileContent = ({ user }) => {
         <img src={imageUrl} alt={user.full_name} />
       </div>
       <div className="profile-info">
-        <div className="profile-actions">
-          <button className="button button-outline button-sm">Message</button>
-          <button className="button button-sm">Follow</button>
-        </div>
+        <h2>{user.full_name}</h2>
+        <Link to={`/${user.username}`} className="username mt-3">
+          @{user.username} {user.verified && <MdVerified title="Verified" />}
+        </Link>
 
-        <h2>
-          {user.full_name} {user.verified && <MdVerified title="Verified" />}
-        </h2>
-
-        <div className="follow-list">
+        <div className="follow-list mt-7">
           <Link to="/profile" className="follow-link">
             <span>30</span>
             Posts
@@ -40,11 +36,10 @@ const ProfileContent = ({ user }) => {
             Following
           </Link>
         </div>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
-          praesentium eius repellat at quis ipsum?
-        </p>
+      </div>
+      <div className="profile-actions">
+        <button className="button button-outline button-sm">Message</button>
+        <button className="button button-sm">Follow</button>
       </div>
     </div>
   );

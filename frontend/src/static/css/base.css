@@ -367,19 +367,6 @@ p a:hover {
   font-weight: 400;
   color: var(--foreground);
 }
-.table-caption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  width: 100%;
-  margin-bottom: 15px;
-}
-.table-caption h5 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--foreground);
-}
 
 /* Alert */
 .alert {
@@ -476,4 +463,27 @@ p a:hover {
   padding: 30px;
   height: 100%;
   overflow-y: auto;
+}
+
+/* Card */
+.card {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--background-alt);
+  border-radius: 5px;
+}
+.card .card-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.card .card-header .card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+.card .card-body {
+  padding: 20px;
 }
