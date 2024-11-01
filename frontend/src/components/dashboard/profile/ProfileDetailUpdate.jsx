@@ -84,7 +84,6 @@ const ProfileDetailUpdate = ({ user }) => {
 
   return (
     <>
-      <h4 className="sub-heading mb-7">Profile Update</h4>
       <form method="POST" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 sm:gird-cols-1 gap-5">
           <div className="col">

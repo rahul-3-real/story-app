@@ -487,3 +487,51 @@ p a:hover {
 .card .card-body {
   padding: 20px;
 }
+
+/* Accordion */
+.accordion {
+  position: relative;
+  width: 100%;
+}
+.accordion .accordion-item {
+  position: relative;
+  border: 1px solid var(--background-alt);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: 0.5s ease all;
+  overflow: hidden;
+}
+.accordion .accordion-item .accordion-title {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--foreground);
+  background: var(--background-alt);
+  transition: 0.5s ease all;
+}
+.accordion .accordion-item.active .accordion-title {
+  background-color: var(--primary);
+  color: var(--light);
+}
+.accordion .accordion-item .accordion-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+  transition: 0.5s ease all;
+}
+.accordion .accordion-item.active .accordion-title svg {
+  transform: rotate(-180deg);
+  color: var(--light);
+}
+.accordion .accordion-item .accordion-content {
+  height: 0;
+  transition: 0.5s ease all;
+}
+.accordion .accordion-item.active .accordion-content {
+  height: auto;
+}

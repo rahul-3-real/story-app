@@ -90,7 +90,6 @@ const ProfileEmailUpdate = ({ user }) => {
 
   return (
     <>
-      <h4 className="sub-heading">Email Update</h4>
       <p className="text-sm text-error mt-1 mb-7">
         Please note, updating your email will unverify your account. You will
         need to verify your new email address to regain full access.
