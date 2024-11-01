@@ -125,9 +125,6 @@ const ProfileAvatarUpdate = ({ user }) => {
     );
     const dataUrl = previewCanvasRef.current.toDataURL();
 
-    // Upload Image
-    console.log(dataUrl);
-
     try {
       const blob = await fetch(dataUrl).then((res) => res.blob());
       const formData = new FormData();

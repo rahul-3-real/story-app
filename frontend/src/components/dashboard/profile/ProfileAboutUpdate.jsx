@@ -35,8 +35,6 @@ const ProfileAboutUpdate = () => {
         }
       );
 
-      console.log(response.data.data);
-
       dispatch(
         updateProfile({
           error: null,

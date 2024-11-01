@@ -33,8 +33,6 @@ const ProfileEmailUpdate = ({ user }) => {
         }
       );
 
-      console.log(response.data.data);
-
       dispatch(
         updateProfile({
           error: null,
