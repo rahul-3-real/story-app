@@ -10,6 +10,7 @@ import ProfileEdit from "./profile/ProfileEdit";
 import ProfileEmailUpdate from "./profile/ProfileEmailUpdate";
 import ProfileDetailUpdate from "./profile/ProfileDetailUpdate";
 import ProfileDetail from "./profile/ProfileDetail";
+import ProfileAvatarUpdate from "./profile/ProfileAvatarUpdate";
 
 export {
   Sidebar,
@@ -23,4 +24,5 @@ export {
   ProfileEmailUpdate,
   ProfileDetailUpdate,
   ProfileDetail,
+  ProfileAvatarUpdate,
 };

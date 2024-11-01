@@ -8,6 +8,7 @@ import {
   AccordionTitle,
   AccordionContent,
 } from "../../Accordion";
+import ProfileAvatarUpdate from "./ProfileAvatarUpdate";
 
 const ProfileEdit = () => {
   const user = useSelector((state) => state.auth.user);
@@ -26,9 +27,16 @@ const ProfileEdit = () => {
         </AccordionItem>
 
         <AccordionItem index={1}>
-          <AccordionTitle>Personal Information</AccordionTitle>
+          <AccordionTitle>Update Personal Information</AccordionTitle>
           <AccordionContent>
             <ProfileDetailUpdate user={user} />
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem index={2}>
+          <AccordionTitle>Update Profile Picture</AccordionTitle>
+          <AccordionContent>
+            <ProfileAvatarUpdate user={user} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

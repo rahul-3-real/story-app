@@ -446,6 +446,22 @@
 .profile-about tr:last-child th {
   border: 0;
 }
+.upload-avatar-btn {
+  padding: 10px 20px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s ease all;
+  display: inline-block;
+}
+.upload-avatar-btn:hover {
+  background: var(--secondary);
+}
+.upload-avatar-btn input {
+  display: none;
+}
 
 /* * Dashboard Pages */
 

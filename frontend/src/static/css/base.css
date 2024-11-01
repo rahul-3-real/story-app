@@ -254,6 +254,26 @@ p a:hover {
 .button-outline:hover {
   color: var(--light);
 }
+.button-error-outline {
+  background-color: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+.button-error-outline:hover {
+  background-color: var(--error);
+  border: 1px solid var(--error);
+  color: var(--light);
+}
+.button-error {
+  background-color: var(--error);
+  color: var(--light);
+  border: 1px solid var(--error);
+}
+.button-error:hover {
+  background-color: var(--error);
+  border: 1px solid var(--error);
+  color: var(--light);
+}
 .button-sm {
   padding: 7px 15px;
   font-size: 14px;
