@@ -8,6 +8,7 @@ import {
   compareFieldValidation,
   emailValidation,
   isEmailValidation,
+  maxLengthValidation,
   minimumAgeValidation,
   minLengthValidation,
   notEmptyValidation,
@@ -603,4 +604,35 @@ export const removeAvatarController = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, user, "Avatar removed successfully!"));
+});
+
+// Update About Controller
+export const updateAboutController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from frontend
+   * TODO: Validate data
+   * TODO: Update data
+   * TODO: Sending Response
+   * **/
+
+  // * Get data from frontend
+  const { about } = req.body;
+  const user = req.user;
+
+  // * Validate data
+  maxLengthValidation(about, 250, "About");
+
+  // * Find user
+  const updatedUser = await User.findByIdAndUpdate(
+    user?._id,
+    { $set: { about } },
+    { new: true }
+  );
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, { user: updatedUser }, "About updated successfully!")
+    );
 });

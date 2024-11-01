@@ -82,6 +82,18 @@ export const minLengthValidation = (input, length, fieldName = "Input") => {
   return length;
 };
 
+// Maximum Length Validation
+export const maxLengthValidation = (input, length, fieldName = "Input") => {
+  if (input.length >= length) {
+    throw new ApiError(
+      400,
+      `${fieldName} length must be less than ${length} characters`
+    );
+  }
+
+  return length;
+};
+
 // Compare Field Validation
 export const compareFieldValidation = (
   input1,
