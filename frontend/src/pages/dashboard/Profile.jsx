@@ -25,7 +25,7 @@ const Profile = () => {
     Profile: "current",
   };
 
-  const pathsToCheck = ["/profile/edit"];
+  const pathsToCheck = ["/profile/edit", "/profile/about"];
   const isDetailsModalOpen = pathsToCheck.some((path) =>
     location.pathname.includes(path)
   );

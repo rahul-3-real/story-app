@@ -15,7 +15,7 @@ import {
 } from "../pages/authentication";
 import { Dashboard, Profile } from "../pages/dashboard";
 import { Home } from "../pages/website";
-import { ProfileEdit } from "../components/dashboard";
+import { ProfileAboutUpdate, ProfileEdit } from "../components/dashboard";
 
 const AppRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -81,7 +81,10 @@ const AppRoutes = () => {
         {
           path: "profile",
           element: <Profile />,
-          children: [{ path: "edit", element: <ProfileEdit /> }],
+          children: [
+            { path: "edit", element: <ProfileEdit /> },
+            { path: "about", element: <ProfileAboutUpdate /> },
+          ],
         },
       ],
     },

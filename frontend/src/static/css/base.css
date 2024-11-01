@@ -330,6 +330,9 @@ p a:hover {
 .form-group .form-control[type="password"]::-ms-clear {
   display: none;
 }
+.form-group textarea.form-control {
+  height: 150px;
+}
 [data-theme="light"]
   .form-group
   .form-control::-webkit-calendar-picker-indicator {

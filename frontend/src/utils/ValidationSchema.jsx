@@ -106,3 +106,8 @@ export const profileSchema = yup.object().shape({
     .oneOf(["Male", "Female", "Other"], "Invalid gender")
     .nullable(true),
 });
+
+// About Schema Validation
+export const aboutSchemaValidation = yup.object().shape({
+  about: yup.string().max(250, "About must be at least 250 characters"),
+});

@@ -6,13 +6,17 @@ const ProfileAbout = ({ user }) => {
     <div className="card profile-about">
       <div className="card-header">
         <h5 className="card-title">About You</h5>
-        <Link to="/profile/edit" className="button button-outline button-sm">
+        <Link to="/profile/about" className="button button-outline button-sm">
           <HiOutlinePencil />
           <span>Edit About</span>
         </Link>
       </div>
       <div className="card-body">
-        {user.about ? user.about : <p>Write something about yourself.</p>}
+        {user.about && user.about !== "" ? (
+          <p className="whitespace-pre-wrap">{user.about}</p>
+        ) : (
+          <p>Write something about yourself.</p>
+        )}
       </div>
     </div>
   );

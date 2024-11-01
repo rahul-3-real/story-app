@@ -18,7 +18,7 @@ const ProfileContent = ({ user }) => {
       </div>
       <div className="profile-info">
         <h2>{user.full_name}</h2>
-        <Link to={`/${user.username}`} className="username mt-3">
+        <Link to={`/@${user.username}`} className="username mt-3">
           @{user.username} {user.verified && <MdVerified title="Verified" />}
         </Link>
 
