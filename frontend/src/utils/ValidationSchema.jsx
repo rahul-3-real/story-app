@@ -105,6 +105,7 @@ export const profileSchema = yup.object().shape({
     .string()
     .oneOf(["Male", "Female", "Other"], "Invalid gender")
     .nullable(true),
+  country: yup.string(),
 });
 
 // About Schema Validation

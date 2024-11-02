@@ -53,6 +53,13 @@ const ProfileDetail = ({ user }) => {
               </tr>
             )}
 
+            {user.country && (
+              <tr>
+                <th className="w-[250px]">Country</th>
+                <td>{user.country}</td>
+              </tr>
+            )}
+
             <tr>
               <th className="w-[250px]">Verified</th>
               <td>

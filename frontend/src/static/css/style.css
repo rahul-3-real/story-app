@@ -53,7 +53,6 @@
   width: 300px;
   height: 100vh;
   border-right: 1px solid var(--background-alt);
-  transition: 0.5s ease all;
 }
 .db-wrapper.collapsed .db-sidebar {
   width: 100px;
@@ -67,7 +66,6 @@
   overflow-x: hidden;
   overflow-y: auto;
   border-right: 1px solid var(--background-alt);
-  transition: 0.5s ease all;
 }
 .db-wrapper.collapsed .db-content {
   width: calc(100% - 100px);
@@ -76,7 +74,6 @@
 
 /* Sidebar */
 .db-sidebar {
-  transition: 0.5s ease all;
 }
 .db-sidebar .toggle {
   position: absolute;
@@ -92,7 +89,6 @@
   color: var(--foreground);
   border-radius: 50px;
   cursor: pointer;
-  transition: 0.5s ease all;
   z-index: 2;
   transform: rotate(180deg);
 }
@@ -136,7 +132,6 @@
 }
 .db-sidebar .actions .profile a span {
   width: calc(100% - 80px);
-  transition: 0.5s ease all;
   opacity: 1;
   margin-left: 20px;
 }
@@ -175,7 +170,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.5s ease all;
   opacity: 1;
   margin-left: 20px;
 }
@@ -220,7 +214,6 @@
   font-size: 16px;
   font-weight: 400;
   opacity: 1;
-  transition: 0.5s ease all;
   margin-left: 20px;
   width: calc(100% - 79px);
   text-align: left;
@@ -272,7 +265,6 @@
   font-size: 20px;
   color: var(--foreground);
   border-left: 1px solid var(--background-alt);
-  transition: 0.5s ease all;
 }
 .db-header .db-search .form .filter:hover,
 .db-header .db-search .form .filter:active,
@@ -281,10 +273,9 @@
 }
 .db-header .db-search .form input {
   width: calc(100% - 100px);
-  background-color: var(--background);
+  background-color: transparent;
   border: 0;
   outline: 0;
-  transition: 0.5s ease all;
   font-size: 16px;
   font-weight: 400;
   color: var(--foreground);
@@ -315,7 +306,6 @@
   font-size: 14px;
   font-weight: 300;
   color: var(--foreground);
-  transition: 0.5s ease all;
 }
 .db-header .db-search .content ul li a:hover {
   color: var(--primary);
@@ -337,7 +327,6 @@
   font-size: 16px;
   font-weight: 300;
   color: var(--foreground);
-  transition: 0.5s ease all;
 }
 .db-breadcrumb .back-button:hover {
   color: var(--primary);
@@ -453,7 +442,6 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.5s ease all;
   display: inline-block;
 }
 .upload-avatar-btn:hover {

@@ -40,6 +40,7 @@
   padding: 0;
   outline: 0;
   box-sizing: border-box;
+  transition: 0.5s ease all;
 }
 *::selection {
   background: var(--background-alt);
@@ -62,6 +63,7 @@ body {
   background: var(--background);
   overflow-x: hidden;
   position: relative;
+  transition: 0.5s ease all;
 }
 h1,
 h2,
@@ -99,10 +101,13 @@ p {
 p a {
   font-weight: 400;
   color: var(--primary);
-  transition: 0.5s ease all;
 }
 p a:hover {
   color: var(--secondary);
+}
+svg,
+svg > * {
+  transition: none !important;
 }
 
 /* Background */
@@ -236,7 +241,6 @@ p a:hover {
   font-size: 16px;
   font-weight: 500;
   text-transform: capitalize;
-  transition: 0.5s ease all;
 }
 .button:hover {
   background-color: var(--secondary);
@@ -302,7 +306,6 @@ p a:hover {
   border: 1px solid var(--background-alt);
   border-radius: 5px;
   outline: 0;
-  transition: 0.5s ease all;
   font-size: 16px;
   font-weight: 400;
   color: var(--foreground);
@@ -361,7 +364,6 @@ p a:hover {
   line-height: 100%;
   color: var(--primary);
   white-space: nowrap;
-  transition: 0.5s ease all;
   padding-left: 10px;
 }
 .db-logo span {
@@ -404,7 +406,6 @@ p a:hover {
   border-bottom: 5px solid var(--primary);
   border-radius: 5px;
   padding: 15px 20px;
-  transition: 0.5s ease all;
   animation: slideAlert 0.5s ease;
   overflow: hidden;
 }
@@ -521,7 +522,6 @@ p a:hover {
   border: 1px solid var(--background-alt);
   border-radius: 5px;
   margin-bottom: 20px;
-  transition: 0.5s ease all;
   overflow: hidden;
 }
 .accordion .accordion-item .accordion-title {
@@ -535,7 +535,6 @@ p a:hover {
   text-transform: capitalize;
   color: var(--foreground);
   background: var(--background-alt);
-  transition: 0.5s ease all;
 }
 .accordion .accordion-item.active .accordion-title {
   background-color: var(--primary);
@@ -545,7 +544,6 @@ p a:hover {
   width: 20px;
   height: 20px;
   color: var(--primary);
-  transition: 0.5s ease all;
 }
 .accordion .accordion-item.active .accordion-title svg {
   transform: rotate(-180deg);
@@ -553,7 +551,6 @@ p a:hover {
 }
 .accordion .accordion-item .accordion-content {
   height: 0;
-  transition: 0.5s ease all;
 }
 .accordion .accordion-item.active .accordion-content {
   height: auto;

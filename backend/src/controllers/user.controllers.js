@@ -529,7 +529,7 @@ export const updateProfileController = asyncHandler(async (req, res) => {
    * **/
 
   // * Get updated profile data from frontend
-  const { full_name, date_of_birth, gender } = req.body;
+  const { full_name, date_of_birth, gender, country } = req.body;
 
   try {
     // * Find the user by ID
@@ -545,6 +545,7 @@ export const updateProfileController = asyncHandler(async (req, res) => {
     user.full_name = full_name || user.full_name;
     user.date_of_birth = date_of_birth || user.date_of_birth;
     user.gender = gender || user.gender;
+    user.country = country || user.country;
 
     // * Save the updated user profile
     await user.save();

@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import countryList from "react-select-country-list";
 
 import { Input, Select } from "../../forms";
 import { profileSchema } from "../../../utils/ValidationSchema";
@@ -15,11 +16,13 @@ const ProfileDetailUpdate = ({ user }) => {
   const dispatch = useDispatch();
 
   const [isUpdated, setIsUpdated] = useState(false);
+  const options = useMemo(() => countryList().getData(), []);
 
   const initialValues = {
     full_name: user?.full_name || "",
     date_of_birth: FormatInputDate(user?.date_of_birth) || "",
     gender: user?.gender || "",
+    country: user?.country || "",
   };
 
   const onSubmit = async (values, { setErrors, setSubmitting, resetForm }) => {
@@ -128,6 +131,18 @@ const ProfileDetailUpdate = ({ user }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.date_of_birth && errors.date_of_birth}
+            />
+          </div>
+
+          <div className="col">
+            <Select
+              label="Country"
+              name="country"
+              value={values.country}
+              options={options}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.country && errors.country}
             />
           </div>
         </div>
