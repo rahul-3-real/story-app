@@ -72,7 +72,7 @@ const Login = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      email: "",
+      identifier: "",
       password: "",
     },
     validationSchema: loginSchema,

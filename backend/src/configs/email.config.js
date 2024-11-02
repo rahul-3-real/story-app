@@ -59,12 +59,12 @@ export const verifyEmail = async (sendTo, verifyEmailCode) => {
   const data = {
     email: sendTo.email,
     full_name: sendTo.full_name,
-    verifyLink: `${appUrl}/verify-email/${verifyEmailCode}`,
+    verifyLink: `${appUrl}/verify-account/${verifyEmailCode}`,
   };
 
   try {
     const emailTemplate = await renderEmailTemplate(
-      "src/templates/emailer/verify-email.ejs",
+      "src/templates/emailer/verify-account.ejs",
       data
     );
 
