@@ -17,6 +17,7 @@ import {
   removeAvatarController,
   forgotPasswordValidateTokenController,
   updateAboutController,
+  updateUsernameController,
 } from "../controllers/user.controllers.js";
 import { verifyUser } from "../middlewares/auth.middleware.js";
 import uploadMiddleware from "../middlewares/multer.middleware.js";
@@ -44,6 +45,7 @@ router
   .patch(verifyUser, verifyAccountRequestController);
 
 router.route("/update-email").patch(verifyUser, updateEmailController);
+router.route("/update-username").patch(verifyUser, updateUsernameController);
 router.route("/update-profile").patch(verifyUser, updateProfileController);
 router
   .route("/update-avatar")

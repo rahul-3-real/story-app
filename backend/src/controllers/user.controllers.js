@@ -512,10 +512,46 @@ export const updateEmailController = asyncHandler(async (req, res) => {
         )
       );
   } catch (error) {
-    throw new ApiError(
-      500,
-      error.message || "Failed to send verification email"
-    );
+    throw new ApiError(500, error.message || "Failed to update email");
+  }
+});
+
+// Update Username Controller
+export const updateUsernameController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get new username from frontend
+   * TODO: Validate data
+   * TODO: Check if new username is already taken
+   * TODO: Update user's username
+   * TODO: Sending Response
+   * **/
+
+  // * Get new username from frontend
+  const { newUsername } = req.body;
+
+  // * Validate data
+  notEmptyValidation([newUsername]);
+  minLengthValidation(newUsername, 3, "Username");
+  usernameValidation(newUsername);
+
+  // * Check if new username is already taken
+  const existingUser = await User.findOne({ username: newUsername });
+  if (existingUser && existingUser._id.toString() !== req.user._id.toString()) {
+    throw new ApiError(400, "Username is already taken");
+  }
+
+  try {
+    // * Update user's username
+    const user = req.user;
+    user.username = newUsername;
+    await user.save();
+
+    // * Sending Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Username updated successfully!"));
+  } catch (error) {
+    throw new ApiError(500, error.message || "Failed to update username");
   }
 });
 
