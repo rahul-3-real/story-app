@@ -10,16 +10,18 @@ const DashboardLayout = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const { sidebarOpen, toggleSidebar } = useToggleSidebar();
 
+  // Redirect unauthenticated users
   useEffect(() => {
     if (!isAuthenticated) {
-      return navigate("/login");
+      navigate("/login");
     }
   }, [isAuthenticated, navigate]);
+
+  if (!isAuthenticated) return null;
 
   return (
     <div className={`db-wrapper ${!sidebarOpen ? "collapsed" : ""}`}>
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-
       <div className="db-content">
         <Header />
         <Outlet />

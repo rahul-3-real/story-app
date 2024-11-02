@@ -38,39 +38,23 @@ const AppRoutes = () => {
       children: [
         {
           path: "register",
-          element: isAuthenticated ? (
-            <Navigate to="/dashboard" />
-          ) : (
-            <Register />
-          ),
+          element: <Register />,
         },
         {
           path: "login",
-          element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login />,
+          element: <Login />,
         },
         {
           path: "forgot-password",
-          element: isAuthenticated ? (
-            <Navigate to="/dashboard" />
-          ) : (
-            <ForgotPassword />
-          ),
+          element: <ForgotPassword />,
         },
         {
           path: "forgot-password-email-sent",
-          element: isAuthenticated ? (
-            <Navigate to="/dashboard" />
-          ) : (
-            <ForgotPasswordEmailSent />
-          ),
+          element: <ForgotPasswordEmailSent />,
         },
         {
           path: "forgot-password-request",
-          element: isAuthenticated ? (
-            <Navigate to="/dashboard" />
-          ) : (
-            <ForgotPasswordRequest />
-          ),
+          element: <ForgotPasswordRequest />,
         },
         {
           path: "verify-account",

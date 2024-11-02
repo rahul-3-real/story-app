@@ -94,6 +94,14 @@ export const emailSchema = yup.object().shape({
     .required("This field is required"),
 });
 
+// Username Schema Validation
+export const usernameSchema = yup.object().shape({
+  newUsername: yup
+    .string()
+    .matches(usernameRules, "Please enter a valid username")
+    .required("This field is required"),
+});
+
 // Profile Schema Validation
 export const profileSchema = yup.object().shape({
   full_name: yup.string().required("Full name is required"),
