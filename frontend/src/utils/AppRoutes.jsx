@@ -12,6 +12,7 @@ import {
   ForgotPassword,
   ForgotPasswordEmailSent,
   ForgotPasswordRequest,
+  VerifyAccount,
 } from "../pages/authentication";
 import { Dashboard, Profile } from "../pages/dashboard";
 import { Home } from "../pages/website";
@@ -37,23 +38,43 @@ const AppRoutes = () => {
       children: [
         {
           path: "register",
-          element: <Register />,
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <Register />
+          ),
         },
         {
           path: "login",
-          element: <Login />,
+          element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login />,
         },
         {
           path: "forgot-password",
-          element: <ForgotPassword />,
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPassword />
+          ),
         },
         {
           path: "forgot-password-email-sent",
-          element: <ForgotPasswordEmailSent />,
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPasswordEmailSent />
+          ),
         },
         {
           path: "forgot-password-request",
-          element: <ForgotPasswordRequest />,
+          element: isAuthenticated ? (
+            <Navigate to="/dashboard" />
+          ) : (
+            <ForgotPasswordRequest />
+          ),
+        },
+        {
+          path: "verify-account",
+          element: <VerifyAccount />,
         },
       ],
     },
