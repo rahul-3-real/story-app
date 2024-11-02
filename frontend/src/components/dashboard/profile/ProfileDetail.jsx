@@ -1,9 +1,46 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { HiOutlinePencil } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 
 import { FormatDate, CalculateAge } from "../../../utils/FormatDate";
+import { showAlert } from "../../../store/slices/alertSlice";
 
 const ProfileDetail = ({ user }) => {
+  const dispatch = useDispatch();
+
+  const verifyAccountLink = async () => {
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_API_BASE_URL}/user/verify-account-request`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      dispatch(
+        showAlert({
+          message: response.data.message,
+          type: "success",
+        })
+      );
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "An error occurred while making this request";
+      dispatch(
+        showAlert({
+          message: errorMessage,
+          type: "error",
+        })
+      );
+    }
+  };
+
   return (
     <div className="card profile-about">
       <div className="card-header">
@@ -68,7 +105,10 @@ const ProfileDetail = ({ user }) => {
                     Verified
                   </button>
                 ) : (
-                  <button className="button button-outline button-sm">
+                  <button
+                    className="button button-outline button-sm"
+                    onClick={verifyAccountLink}
+                  >
                     Verify
                   </button>
                 )}
