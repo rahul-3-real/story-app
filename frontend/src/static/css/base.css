@@ -16,6 +16,7 @@
   --light: #ffffff;
   --light-alt: #eaeaea;
   --error: #ef4444;
+  --success: #71df76;
 }
 :root,
 [data-theme="light"] {
@@ -402,9 +403,8 @@ svg > * {
   max-width: 500px;
   height: auto;
   z-index: 100;
-  background: var(--light);
-  border-bottom: 5px solid var(--primary);
-  border-radius: 5px;
+  background: var(--background-alt);
+  border-left: 5px solid var(--primary);
   padding: 15px 20px;
   animation: slideAlert 0.5s ease;
   overflow: hidden;
@@ -427,16 +427,23 @@ svg > * {
 }
 .alert .close-alert-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  color: var(--error);
-  border-radius: 3px;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  font-size: 14px;
+  border-radius: 50px;
+  background: var(--foreground);
+  color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .alert p {
   width: 80%;
   font-size: 16px;
-  font-weight: 600;
-  color: var(--dark);
+  font-weight: 400;
+  color: var(--foreground);
 }
 
 /* Modal */
