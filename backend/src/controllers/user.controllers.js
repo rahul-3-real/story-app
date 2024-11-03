@@ -673,3 +673,25 @@ export const updateAboutController = asyncHandler(async (req, res) => {
       new ApiResponse(200, { user: updatedUser }, "About updated successfully!")
     );
 });
+
+// Get User Profile By Username Controller
+export const getProfileByUsernameController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get Username from query
+   * TODO: Find User
+   * TODO: Send Response
+   * **/
+
+  // * Find User by username
+  const username = req.query.username.startsWith("@")
+    ? req.query.username.slice(1)
+    : req.query.username;
+
+  const user = await User.findOne({ username });
+  if (!user) throw new ApiError(404, "User not found");
+
+  // * Send Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Fetched user profile successfully!"));
+});
