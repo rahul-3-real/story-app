@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { FormatDate, CalculateAge } from "../../../utils/FormatDate";
 import { showAlert } from "../../../store/slices/alertSlice";
 
-const ProfileDetail = ({ user }) => {
+const ProfileDetail = ({ user, userProfile }) => {
   const dispatch = useDispatch();
 
   const verifyAccountLink = async () => {
@@ -45,10 +45,12 @@ const ProfileDetail = ({ user }) => {
     <div className="card profile-about">
       <div className="card-header">
         <h5 className="card-title">Details About Your Profile</h5>
-        <Link to="/profile/edit" className="button button-outline button-sm">
-          <HiOutlinePencil />
-          <span>Edit Profile</span>
-        </Link>
+        {user.username === userProfile.username && (
+          <Link to="/profile/edit" className="button button-outline button-sm">
+            <HiOutlinePencil />
+            <span>Edit Profile</span>
+          </Link>
+        )}
       </div>
       <div className="card-body">
         <table className="table">

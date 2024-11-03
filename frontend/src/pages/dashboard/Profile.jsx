@@ -70,14 +70,14 @@ const Profile = () => {
       <div className="container">
         <Breadcrumb data={breadcrumbData} />
 
-        <ProfileContent user={user} />
+        <ProfileContent user={user} userProfile={user} />
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-7">
           <div className="col-span-3">
-            <ProfileAbout user={user} />
+            <ProfileAbout user={user} userProfile={user} />
           </div>
           <div className="col-span-2">
-            <ProfileDetail user={user} />
+            <ProfileDetail user={user} userProfile={user} />
           </div>
         </div>
       </div>

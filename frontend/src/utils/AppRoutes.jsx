@@ -14,7 +14,7 @@ import {
   ForgotPasswordRequest,
   VerifyAccount,
 } from "../pages/authentication";
-import { Dashboard, Profile } from "../pages/dashboard";
+import { Dashboard, Profile, ProfileDetail } from "../pages/dashboard";
 import { Home } from "../pages/website";
 import { ProfileAboutUpdate, ProfileEdit } from "../components/dashboard";
 
@@ -74,6 +74,10 @@ const AppRoutes = () => {
             { path: "edit", element: <ProfileEdit /> },
             { path: "about", element: <ProfileAboutUpdate /> },
           ],
+        },
+        {
+          path: ":username",
+          element: <ProfileDetail />,
         },
       ],
     },
