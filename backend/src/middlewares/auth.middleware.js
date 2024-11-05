@@ -38,7 +38,8 @@ export const isAuthorized = (modelName, identifier) =>
 
       // Dynamically select the appropriate model based on modelName
       const ResourceModel = getModelByName(modelName);
-      if (!ResourceModel) throw new Error(`Model ${modelName} not found.`);
+      if (!ResourceModel)
+        throw new ApiError(400, `Model ${modelName} not found.`);
 
       // Fetch the resource from the database
       const resource = await ResourceModel.findById(resourceId);

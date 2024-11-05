@@ -4,6 +4,7 @@ import cors from "cors";
 
 import userRouter from "../routes/user.routes.js";
 import tagRouter from "../routes/tag.routes.js";
+import { errorHandler } from "../utils/apiError.js";
 
 const app = express();
 
@@ -33,5 +34,8 @@ app.get("/api", (req, res) => {
     message: "🟩 API is working!",
   });
 });
+
+// Error handling middleware
+app.use(errorHandler);
 
 export default app;

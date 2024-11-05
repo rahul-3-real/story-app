@@ -3,6 +3,7 @@ import { Router } from "express";
 import { isAuthorized, verifyUser } from "../middlewares/auth.middleware.js";
 import {
   createTagController,
+  deleteTagController,
   fetchTagsController,
   tagDetailController,
   updateTagController,
@@ -16,6 +17,9 @@ router.route("/").post(verifyUser, createTagController);
 router
   .route("/")
   .patch(verifyUser, isAuthorized("Tag", "author"), updateTagController);
+router
+  .route("/")
+  .delete(verifyUser, isAuthorized("Tag", "author"), deleteTagController);
 router.route("/all").get(fetchTagsController);
 
 export default router;
