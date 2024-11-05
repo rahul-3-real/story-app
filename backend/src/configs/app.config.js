@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import userRouter from "../routes/user.routes.js";
+import tagRouter from "../routes/tag.routes.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/static", express.static(process.env.MEDIA_UPLOAD_FOLDER));
 
 // Routes
 app.use("/api/user", userRouter);
+app.use("/api/tag", tagRouter);
 
 // Test Route
 app.get("/api", (req, res) => {
