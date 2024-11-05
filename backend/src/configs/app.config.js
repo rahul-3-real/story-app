@@ -25,7 +25,7 @@ app.use("/static", express.static(process.env.MEDIA_UPLOAD_FOLDER));
 
 // Routes
 app.use("/api/user", userRouter);
-app.use("/api/tag", tagRouter);
+app.use("/api/tags", tagRouter);
 
 // Test Route
 app.get("/api", (req, res) => {

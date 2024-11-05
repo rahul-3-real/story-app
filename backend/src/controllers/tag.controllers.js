@@ -54,3 +54,24 @@ export const createTagController = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, tag, "Tag created successfully!"));
 });
+
+// Get Tag Detail Controller
+export const tagDetailController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get tag id from request
+   * TODO: Search tag
+   * TODO: Sending Response
+   * **/
+
+  // * Get tag id from request
+  const { _id } = req.query;
+
+  // * Search tag
+  const tag = await Tag.findById(_id);
+  if (!tag) throw new ApiError(404, "Tag not found");
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, tag, "Tag fetched successfully!"));
+});
