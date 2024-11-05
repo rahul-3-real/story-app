@@ -35,19 +35,18 @@ export const createTagController = asyncHandler(async (req, res) => {
 
   // * Get data from request
   const { title, description } = req.body;
+  const user = req.user;
 
   // * Validate data
   notEmptyValidation([title, description]);
   minLengthValidation(title, 3, "Title");
-  maxLengthValidation(title, 100, "Title");
   minLengthValidation(description, 50, "Description");
-  maxLengthValidation(description, 250, "Description");
 
   const tagExist = await Tag.findOne({ title });
   if (tagExist) throw new ApiError(400, "Tag already exists");
 
   // * Create Tag
-  const tag = await Tag.create({ title, description });
+  const tag = await Tag.create({ title, description, author: user._id });
 
   // * Sending Response
   return res
@@ -74,4 +73,47 @@ export const tagDetailController = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, tag, "Tag fetched successfully!"));
+});
+
+// Update Tag Controller
+export const updateTagController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from request
+   * TODO: Check if tag exists
+   * TODO: Validate data
+   * TODO: Update data
+   * TODO: Send response
+   **/
+
+  // * Get data from request
+  const { title, description } = req.body;
+  const { _id } = req.query;
+
+  // * Check if tag exists
+  const tag = await Tag.findById(_id);
+  if (!tag) throw new ApiError(404, "Tag not found");
+
+  // * Validate data
+  if (title) {
+    minLengthValidation(title, 3, "Title");
+
+    // Check for existing tag with the same title
+    const tagExists = await Tag.findOne({ title, _id: { $ne: _id } });
+    if (tagExists)
+      throw new ApiError(400, "Tag with this title already exists");
+  }
+
+  if (description) minLengthValidation(description, 50, "Description");
+
+  // * Update data
+  tag.title = title || tag.title;
+  tag.description = description || tag.description;
+
+  // Save the updated tag
+  await tag.save();
+
+  // * Send response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, tag, "Tag updated successfully!"));
 });

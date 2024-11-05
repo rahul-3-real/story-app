@@ -10,7 +10,12 @@ const TagSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      maxlenght: 250,
+      required: true,
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   { timestamps: true }
