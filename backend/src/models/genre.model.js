@@ -12,11 +12,6 @@ const GenreSchema = new mongoose.Schema(
       type: String,
       maxlenght: 250,
     },
-    poster: {
-      type: String,
-      trim: true,
-      match: [/\.(jpe?g|png|gif|svg)$/i, "Please provide a valid image URL"],
-    },
   },
   { timestamps: true }
 );

@@ -71,3 +71,16 @@ export const isVerified = asyncHandler(async (req, res, next) => {
     next(new ApiError(403, error?.message || "Unauthorized access"));
   }
 });
+
+// Check Is Admin
+export const isAdmin = asyncHandler(async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    if (!user.is_admin) throw new ApiError(403, "Unauthorized access");
+
+    next();
+  } catch (error) {
+    next(new ApiError(403, error?.message || "Unauthorized access"));
+  }
+});
