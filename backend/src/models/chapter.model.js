@@ -32,6 +32,12 @@ const ChapterSchema = new mongoose.Schema(
       trim: true,
       match: [/\.(jpe?g|png|gif|svg)$/i, "Please provide a valid image URL"],
     },
+    tags: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
   },
   { timestamps: true }
 );

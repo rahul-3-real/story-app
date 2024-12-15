@@ -12,10 +12,12 @@ const StorySchema = new mongoose.Schema(
       type: String,
       maxlenght: 500,
     },
-    genre: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Genre",
-    },
+    genre: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Genre",
+      },
+    ],
     chapters: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -10,7 +10,6 @@ https://www.figma.com/design/Zl2CK029EP7QoaT67e4FRg/Story-App?node-id=103-2&t=bf
 
 <!-- BACKEND -->
 
-<!-- ! TODOS -->
-
-1. Emails Commented (SMTP Not Working)
-2. Frontend manually typing url is not working
+1. Authentication Completed
+2. Profile Update Completed
+3.

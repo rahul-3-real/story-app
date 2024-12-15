@@ -64,6 +64,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       maxlength: 250,
     },
+    is_author: {
+      type: Boolean,
+      default: false,
+    },
+    is_admin: {
+      type: Boolean,
+      default: false,
+    },
     verified: {
       type: Boolean,
       default: false,
