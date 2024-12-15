@@ -5,6 +5,7 @@ import cors from "cors";
 import userRouter from "../routes/user.routes.js";
 import tagRouter from "../routes/tag.routes.js";
 import genresRouter from "../routes/genre.routes.js";
+import storiesRouter from "../routes/story.routes.js";
 import { errorHandler } from "../utils/apiError.js";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/static", express.static(process.env.MEDIA_UPLOAD_FOLDER));
 app.use("/api/user", userRouter);
 app.use("/api/tags", tagRouter);
 app.use("/api/genres", genresRouter);
+app.use("/api/stories", storiesRouter);
 
 // Test Route
 app.get("/api", (req, res) => {

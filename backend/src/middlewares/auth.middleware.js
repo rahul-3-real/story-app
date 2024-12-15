@@ -84,3 +84,16 @@ export const isAdmin = asyncHandler(async (req, res, next) => {
     next(new ApiError(403, error?.message || "Unauthorized access"));
   }
 });
+
+// Check Is Author
+export const isAuthor = asyncHandler(async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    if (!user.is_author) throw new ApiError(403, "Unauthorized access");
+
+    next();
+  } catch (error) {
+    next(new ApiError(403, error?.message || "Unauthorized access"));
+  }
+});
