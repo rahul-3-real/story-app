@@ -695,3 +695,24 @@ export const getProfileByUsernameController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Fetched user profile successfully!"));
 });
+
+// Become Author Controller
+export const becomeAuthorController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Update is_author
+   * TODO: Sendong Response
+   * **/
+
+  // * Update is_author
+  const reqUser = req.user;
+  const user = await User.findByIdAndUpdate(
+    reqUser._id,
+    { $set: { is_author: true } },
+    { new: true }
+  );
+
+  // * Send Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "User is now an author!"));
+});

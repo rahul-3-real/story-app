@@ -58,3 +58,16 @@ export const isAuthorized = (modelName, identifier) =>
       next(new ApiError(403, error?.message || "Unauthorized access"));
     }
   });
+
+// Check If the user is Verified
+export const isVerified = asyncHandler(async (req, res, next) => {
+  try {
+    const user = req.user;
+
+    if (!user.verified) throw new ApiError(403, "Account is not verified.");
+
+    next();
+  } catch (error) {
+    next(new ApiError(403, error?.message || "Unauthorized access"));
+  }
+});

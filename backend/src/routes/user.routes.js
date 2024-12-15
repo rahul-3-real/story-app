@@ -19,8 +19,9 @@ import {
   updateAboutController,
   updateUsernameController,
   getProfileByUsernameController,
+  becomeAuthorController,
 } from "../controllers/user.controllers.js";
-import { verifyUser } from "../middlewares/auth.middleware.js";
+import { verifyUser, isVerified } from "../middlewares/auth.middleware.js";
 import uploadMiddleware from "../middlewares/multer.middleware.js";
 
 const router = Router();
@@ -57,6 +58,10 @@ router
   );
 router.route("/remove-avatar").patch(verifyUser, removeAvatarController);
 router.route("/update-about").patch(verifyUser, updateAboutController);
+
+router
+  .route("/become-author")
+  .patch(verifyUser, isVerified, becomeAuthorController);
 
 router.route("/").get(verifyUser, getProfileByUsernameController);
 
